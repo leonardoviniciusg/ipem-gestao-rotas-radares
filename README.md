@@ -58,7 +58,7 @@ O sistema funciona de forma integrada, equilibrando automação em segundo plano
 * **Segurança e Minimização de Dados (LGPD):** A rotina no Power Apps aplica **sanitização estrita** aos dados antes de montar o payload. São trafegados unicamente metadados técnicos e logísticos dos instrumentos (número da OS, trecho viário/rodovia, município, volume de faixas e empresa operadora). Nomes de fiscais, contatos de técnicos, CPFs ou dados sigilosos/financeiros nunca são expostos ou enviados à IA.
 * O prompt é processado no **Gemini Flash**, que devolve um array JSON cru com a primeira proposta de agrupamento de rotas e ordem de atendimento.
 
-### 3. Edição Manual Fina (Sem Re-prompting)
+### 3. Edição Manual Fina
 * O retorno JSON é ingerido diretamente no aplicativo via `ParseJSON`.
 * A partir daqui, a edição é **100% manual e humana**: o operador pode criar novas rotas, excluir paradas e reordenar a sequência de visitação (`Ordem_Agendamento`) para corrigir desvios deixados pela IA.
 * **Validação Cartográfica:** O operador abre o trajeto no Google Maps através de links dinâmicos multi-waypoint para conferir visualmente a viabilidade do percurso antes de fechar a rota.
