@@ -1,4 +1,4 @@
-# 📍 Agendamento e Organização de Radares (Power Platform)
+# 📍 Agendamento digital de Radares (Power Platform)
 
 Solução corporativa desenvolvida em **Microsoft Power Apps (Canvas / Power Fx)** integrada a **SharePoint Lists**, **Power Automate**, **Microsoft Forms** e **Microsoft Teams**, focada na digitalização do fluxo de ordens de serviço (OS) e na assistência ao planejamento logístico de rotas com apoio de IA (Google Gemini Flash) e validação geográfica.
 
