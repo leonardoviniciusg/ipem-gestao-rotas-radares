@@ -174,3 +174,13 @@ Exemplo de saída esperada:
 * **Geocodificação e Abertura para Tecnologias Dedicadas:**
   * Mapear e associar a coordenada exata ($\text{latitude}, \text{longitude}$) de cada instrumento cadastrado, viabilizando abertura milimétrica no mapa.
   * Com os pontos consolidados em coordenadas, abrir caminho para a **adoção de tecnologias inovadoras e ferramentas sob medida para roteirização logística**, superando o estágio de apoio por LLM e evoluindo para cálculos de rota automatizados e dedicados conforme a infraestrutura viária evoluir.
+
+## 📂 Estrutura de Arquivos e Código-Fonte
+
+Para consultar os códigos e componentes da solução, o repositório está organizado nas seguintes pastas:
+
+* **`/solution`**: Contém o arquivo executável exportado do aplicativo (`.msapp` - Microsoft Power Apps), que pode ser aberto e inspecionado diretamente pelo Power Apps Studio.
+* **`/src`**: Contém a extração em formato texto dos componentes e lógicas Power Fx das três telas principais do sistema:
+  * Tela de Pendentes e geração de prompt.
+  * Tela de edição de rotas e validação geográfica.
+  * Tela de distribuição por equipes e agendamento.
