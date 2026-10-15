@@ -1,4 +1,4 @@
-# 📍 Agendamento digital de Radares (Power Platform)
+# 📍 Agendamento Digital de Radares (Power Platform)
 
 Solução corporativa desenvolvida em **Microsoft Power Apps (Canvas / Power Fx)** integrada a **SharePoint Lists**, **Power Automate**, **Microsoft Forms** e **Microsoft Teams**, focada na digitalização do fluxo de ordens de serviço (OS) e na assistência ao planejamento logístico de rotas com apoio de IA (Google Gemini Flash) e validação geográfica.
 
@@ -21,7 +21,7 @@ O objetivo final de todo o processo de planejamento é gerar as **tabelas consol
 * **Eliminação do Papel:** Centralização de todas as solicitações em ambiente seguro e estruturado na nuvem.
 * **Gestão Ativa da Execução:** Além de planejar, o sistema permite acompanhar digitalmente o andamento diário das fiscalizações em tempo real (marcando status como Executado, Pendente ou Reagendado).
 
-## 🔄 Fluxo Operacional de Ponta a Ponta
+## 🔄 Fluxo Operacional
 
 O sistema funciona de forma integrada, equilibrando automação em segundo plano com tomada de decisão humana:
 
@@ -70,7 +70,7 @@ O sistema funciona de forma integrada, equilibrando automação em segundo plano
 
 ---
 
-## 🤖 Engenharia de Prompt & Uso da IA
+## 🤖 Prompt & Uso da IA
 
 O modelo de linguagem atua como um assistente heurístico que cria o primeiro esboço de trajeto a partir de restrições operacionais conhecidas.
 
