@@ -1,0 +1,2740 @@
+Screens:
+  tela_escalados:
+    Children:
+      - btn_TopBar_Titulo_Escalados:
+          Control: ModernButton@1.0.0
+          Group: barra_contexto_escalados
+          Properties:
+            FontWeight: =FontWeight.Lighter
+            Height: =55
+            Icon: ="CalendarAdd"
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =22
+            Text: ="AGENDAMENTO DE RADARES"
+            Width: =1920
+      - con_TopBar_Nav_Escalados:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Group: barra_contexto_escalados
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            DropShadow: =DropShadow.None
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =1920
+            Y: =55
+          Children:
+            - ava_TopBar_Usuario_Escalados:
+                Control: ModernAvatar@1.1.0
+                Properties:
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =15
+                  PaddingLeft: =15
+                  PaddingRight: =15
+                  PaddingTop: =15
+            - lbl_TopBar_Usuario_Escalados:
+                Control: ModernText@1.0.0
+                Properties:
+                  Color: =RGBA(8, 52, 100, 1)
+                  FontWeight: =FontWeight.Semibold
+                  Height: =80
+                  PaddingLeft: =15
+                  Text: =User().FullName
+                  Width: =700
+                  X: =40
+                  Y: =40
+            - tab_TopBar_Nav_Escalados:
+                Control: ModernTabList@1.0.2
+                Properties:
+                  Default: |-
+                    =Switch(App.ActiveScreen, tela_pendentes, {Value: "Pendentes"}, tela_escalados, {Value: "Escalados"}, tela_agendados, {Value: "Agendados"})
+                  Items: |-
+                    =Table({Value: "Pendentes"}, {Value: "Escalados"}, {Value: "Agendados"})
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Switch(Self.Selected.Value, "Pendentes", Navigate(tela_pendentes, ScreenTransition.Fade), "Escalados", Navigate(tela_escalados, ScreenTransition.Fade), "Agendados", Navigate(tela_agendados, ScreenTransition.Fade))
+                  Size: =22
+                  Width: =500
+      - rec_Fundo_Escalados:
+          Control: Rectangle@2.3.0
+          Properties:
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =765
+            Width: =1920
+            Y: =135
+      - con_Grid_Principal_Escalados:
+          Control: GroupContainer@1.5.0
+          Variant: GridLayout
+          Properties:
+            Height: =765
+            LayoutGap: =15
+            LayoutGridColumns: =48
+            LayoutGridRows: =19
+            Width: =1920
+            Y: =135
+          Children:
+            - con_Card_Pendentes_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGridColumnEnd: =49
+                  LayoutGridColumnStart: =27
+                  LayoutGridRowEnd: =20
+                  LayoutGridRowStart: =1
+                  X: =40
+                  Y: =40
+                Children:
+                  - con_Header_Pendentes_Escalados:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(227, 234, 243, 1)
+                        FillPortions: =0
+                        Height: =65
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width
+                      Children:
+                        - ico_Header_Pendentes_Escalados:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              DisplayMode: =DisplayMode.View
+                              Height: =65
+                              Icon: =Icon.ListWatchlistRemind
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =15
+                              PaddingLeft: =20
+                              PaddingRight: =15
+                              PaddingTop: =15
+                        - lbl_Header_Pendentes_Escalados:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              FontWeight: =FontWeight.Semibold
+                              Height: =65
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =20
+                              Text: ="LISTA DE ORDENS DE SERVIÇO PENDENTES"
+                              Width: =420
+                        - lbl_Header_TotalOS_Escalados:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =App.Theme.Colors.Lighter20
+                              FontWeight: =FontWeight.Bold
+                              Height: =35
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =25
+                              RadiusBottomRight: =25
+                              RadiusTopLeft: =25
+                              RadiusTopRight: =25
+                              Size: =16
+                              Text: =CountRows(gal_Pendentes_Disponiveis.AllItems)
+                              Width: =47
+                              Wrap: =false
+                        - rec_Space_01_Escalados:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - lbl_Header_TotalFaixas_Escalados:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =App.Theme.Colors.Lighter30
+                              FontWeight: =FontWeight.Bold
+                              Height: =35
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =25
+                              RadiusBottomRight: =25
+                              RadiusTopLeft: =25
+                              RadiusTopRight: =25
+                              Size: =16
+                              Text: =Sum(gal_Pendentes_Disponiveis.AllItems, faixas) & " FAIXAS"
+                              Width: =105
+                              Wrap: =false
+                        - rec_Space_02_Escalados:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              FillPortions: =1
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnPesquisar_Escalados:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =If(txt_Popup_BuscaEndereco_Escalados.Text = "", RGBA(12, 59, 94, 1), RGBA(12, 79, 94, 1))
+                              Height: =40
+                              Icon: ="Search"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: !ctxPesquisarOS,
+                                    ctxFiltrarOS: false,
+                                    ctxOrdenarOS: false
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_03_Escalados:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnFiltrar_Escalados:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =RGBA(12, 59, 94, 1)
+                              Height: =40
+                              Icon: ="Filter"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: false,
+                                    ctxFiltrarOS: !ctxFiltrarOS,
+                                    ctxOrdenarOS: false
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_04_Escalados:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnOrdenar_Escalados:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =RGBA(12, 59, 94, 1)
+                              Height: =40
+                              Icon: ="ArrowSort"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: false,
+                                    ctxFiltrarOS: false,
+                                    ctxOrdenarOS: !ctxOrdenarOS
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_05_Escalados:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                  - con_Wrapper_Galeria_Pendentes_Escalados:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =RGBA(227, 234, 243, 1)
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.None
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                      Children:
+                        - gal_Pendentes_Disponiveis:
+                            Control: Gallery@2.15.0
+                            Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                            Properties:
+                              Items: |-
+                                =SortByColumns(
+                                    With(
+                                        { 
+                                            termoBusca: Lower(Trim(Coalesce(txt_Popup_BuscaEndereco_Escalados.Text, txt_Popup_BuscaEndereco_Escalados.Text, ""))) 
+                                        },
+                                        Filter(
+                                            colOrdens,
+                                            status.Value = "Pendente",
+
+                                            termoBusca = "" Or termoBusca in Lower(Coalesce(loc_ver, "")),
+
+                                            CountIf(cmb_Filtro_Municipio_Escalados.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                            municipio in cmb_Filtro_Municipio_Escalados.SelectedItems.Value,
+
+                                            CountIf(cmb_Filtro_Empresa_Escalados.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                            empresa in cmb_Filtro_Empresa_Escalados.SelectedItems.Value,
+
+                                            CountIf(cmb_Filtro_Agente_Escalados.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                            agente_mob in cmb_Filtro_Agente_Escalados.SelectedItems.Value
+                                        )
+                                    ),
+                                    Coalesce(drp_Popup_Ordenar_Escalados.Selected.Coluna, "n_os"),
+                                    SortOrder.Ascending
+                                )
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              TemplateSize: =120
+                              Transition: =Transition.Push
+                            Children:
+                              - con_CardItem_Pendentes_Escalados:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    DropShadow: =DropShadow.None
+                                    Fill: =RGBA(227, 234, 243, 1)
+                                    Height: =110
+                                    RadiusBottomLeft: =25
+                                    RadiusBottomRight: =25
+                                    RadiusTopLeft: =25
+                                    RadiusTopRight: =25
+                                    Width: =827
+                                  Children:
+                                    - btn_ItemOS_AdicionarNaRota:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          DisplayMode: |-
+                                            =If(
+                                                btn_Rotas_EditarNome_Escaladas.Text = "" || StartsWith(tab_Rotas_TipoVisualizacao.Selected.Value, "LANÇADAS"),
+                                                DisplayMode.Disabled,
+                                                DisplayMode.Edit
+                                            )
+                                          Height: =110
+                                          Icon: ="ArrowLeft"
+                                          Layout: =ButtonLayout.IconOnly
+                                          OnSelect: |-
+                                            =Patch(
+                                                colOrdens,
+                                                ThisItem,
+                                                {
+                                                    rota_nome: tab_Rotas_ListaVertical_Escaladas.Selected.Value,
+                                                    ordem_agendamento: Coalesce(
+                                                        Max(
+                                                            Filter(colOrdens, rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value),
+                                                            ordem_agendamento
+                                                        ),
+                                                        0
+                                                    ) + 1,
+                                                    status: { Value: "Escalado" }
+                                                }
+                                            )
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Text: =
+                                          Width: =50
+                              - ico_ItemOS_Empresa_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =25
+                                    Icon: ="BuildingRetail"
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =2
+                                    PaddingLeft: =2
+                                    PaddingRight: =2
+                                    PaddingTop: =2
+                                    Width: =25
+                                    X: =61
+                                    Y: =16
+                              - lbl_ItemOS_Empresa_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Align: =Align.Center
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Fill: =RGBA(15, 84, 140, 1)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =10
+                                    RadiusBottomRight: =10
+                                    RadiusTopLeft: =10
+                                    RadiusTopRight: =10
+                                    Size: =13
+                                    Text: =ThisItem.empresa
+                                    X: =86
+                                    Y: =16
+                              - ico_ItemOS_Serie_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =25
+                                    Icon: ="CameraDome"
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =2
+                                    PaddingLeft: =2
+                                    PaddingRight: =2
+                                    PaddingTop: =2
+                                    Width: =25
+                                    X: =236
+                                    Y: =16
+                              - lbl_ItemOS_Serie_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Align: =Align.Center
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Fill: =RGBA(12, 59, 94, 0.5)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =10
+                                    RadiusBottomRight: =10
+                                    RadiusTopLeft: =10
+                                    RadiusTopRight: =10
+                                    Size: =13
+                                    Text: =ThisItem.n_serie
+                                    Width: =120
+                                    X: =261
+                                    Y: =16
+                              - lbl_ItemOS_Faixas_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Align: =Align.Center
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Fill: =RGBA(0, 81, 100, 1)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =25
+                                    RadiusBottomRight: =25
+                                    RadiusTopLeft: =25
+                                    RadiusTopRight: =25
+                                    Size: =13
+                                    Text: =ThisItem.faixas
+                                    Width: =30
+                                    X: =679
+                                    Y: =12
+                              - lbl_ItemOS_NumOS_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Align: =Align.Center
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Fill: =RGBA(12, 59, 94, 1)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =25
+                                    RadiusBottomRight: =25
+                                    RadiusTopLeft: =25
+                                    RadiusTopRight: =25
+                                    Size: =13
+                                    Text: =ThisItem.n_os
+                                    Width: =100
+                                    X: =714
+                                    Y: =12
+                              - ico_ItemOS_Endereco_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =25
+                                    Icon: ="Location"
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =2
+                                    PaddingLeft: =2
+                                    PaddingRight: =2
+                                    PaddingTop: =2
+                                    Width: =25
+                                    X: =61
+                                    Y: =44
+                              - lbl_ItemOS_Endereco_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Color: =RGBA(12, 59, 94, 1)
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =ThisItem.loc_ver
+                                    Width: =720
+                                    Wrap: =false
+                                    X: =92
+                                    Y: =44
+                              - ico_ItemOS_Municipio_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =25
+                                    Icon: ="Building"
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =2
+                                    PaddingLeft: =2
+                                    PaddingRight: =2
+                                    PaddingTop: =2
+                                    Width: =25
+                                    X: =61
+                                    Y: =69
+                              - lbl_ItemOS_Municipio_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Color: =RGBA(12, 59, 94, 1)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =ThisItem.municipio
+                                    VerticalAlign: =VerticalAlign.Bottom
+                                    Width: =230
+                                    Wrap: =false
+                                    X: =92
+                                    Y: =69
+                              - ico_ItemOS_Venc_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =15
+                                    Icon: ="Tag"
+                                    OnSelect: =Select(Parent)
+                                    Width: =15
+                                    X: =673
+                                    Y: =88
+                              - lbl_ItemOS_Venc_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Color: =RGBA(12, 59, 94, 1)
+                                    FontWeight: =FontWeight.Lighter
+                                    Height: =15
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      ="Vencimento: " & ThisItem.vencimento
+                                    Width: =125
+                                    Wrap: =false
+                                    X: =693
+                                    Y: =88
+                              - ico_ItemOS_Agente_Escalados:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Height: =25
+                                    Icon: ="VehicleBus"
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =2
+                                    PaddingLeft: =2
+                                    PaddingRight: =2
+                                    PaddingTop: =2
+                                    Width: =25
+                                    X: =322
+                                    Y: =69
+                              - lbl_ItemOS_Agente_Escalados:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Color: =RGBA(12, 59, 94, 1)
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =14
+                                    Text: =ThisItem.agente_mob
+                                    VerticalAlign: =VerticalAlign.Bottom
+                                    Width: =300
+                                    Wrap: =false
+                                    X: =353
+                                    Y: =69
+            - con_Card_EdicaoRotas_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGridColumnEnd: =27
+                  LayoutGridColumnStart: =1
+                  LayoutGridRowEnd: =20
+                  LayoutGridRowStart: =1
+                  X: =40
+                  Y: =40
+                Children:
+                  - con_Header_EdicaoRotas_Escalados:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(227, 234, 243, 1)
+                        FillPortions: =0
+                        Height: =65
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width
+                      Children:
+                        - ico_Header_EdicaoRotas_Escalados:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              DisplayMode: =DisplayMode.View
+                              Height: =65
+                              Icon: =Icon.Settings
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =
+                              PaddingBottom: =20
+                              PaddingLeft: =25
+                              PaddingRight: =20
+                              PaddingTop: =20
+                        - lbl_Header_EdicaoRotas_Escalados:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              FontWeight: =FontWeight.Semibold
+                              Height: =65
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: =
+                              Size: =20
+                              Text: ="EDIÇÃO E LANÇAMENTO DE ROTAS"
+                              Width: =350
+                        - tab_Rotas_TipoVisualizacao:
+                            Control: ModernTabList@1.0.2
+                            Properties:
+                              FillPortions: =1
+                              Items: |-
+                                =Table(
+                                    {
+                                        Id: "ESCALADAS",
+                                        Value: "ESCALADAS (" & 
+                                            CountRows(
+                                                Distinct(
+                                                    Filter(colOrdens, status.Value = "Escalado" && !IsBlank(rota_nome)),
+                                                    rota_nome
+                                                )
+                                            ) & ")"
+                                    },
+                                    {
+                                        Id: "LANCADAS",
+                                        Value: "LANÇADAS (" & 
+                                            CountRows(
+                                                Distinct(
+                                                    Filter(colOrdens, status.Value = "Agendado" && !IsBlank(rota_nome)),
+                                                    rota_nome
+                                                )
+                                            ) & ")"
+                                    }
+                                )
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnChange: |-
+                                =UpdateContext({ 
+                                    ctxRotaAtiva: Blank(), 
+                                    ctxEditarNomeRota: false 
+                                });
+                                Reset(tab_Rotas_ListaVertical_Escaladas);
+                                Reset(tab_Rotas_ListaVertical_Lancadas)
+                              OnSelect: |-
+                                =UpdateContext({ 
+                                    ctxRotaAtiva: Blank(), 
+                                    ctxEditarNomeRota: false 
+                                });
+                                Reset(tab_Rotas_ListaVertical_Escaladas);
+                                Reset(tab_Rotas_ListaVertical_Lancadas)
+                              Size: =18
+                  - con_Rotas_AbaEscaladas_Miolo:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Visible: =StartsWith(tab_Rotas_TipoVisualizacao.Selected.Value, "ESCALADAS")
+                      Children:
+                        - con_Rotas_Sidebar_Escaladas:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(227, 234, 243, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =280
+                            Children:
+                              - con_Rotas_SidebarHeader_Escaladas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    Fill: =RGBA(180, 214, 250, 0.22)
+                                    FillPortions: =0
+                                    Height: =110
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                  Children:
+                                    - con_Rotas_TopButtons_Escaladas:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: AutoLayout
+                                        Properties:
+                                          BorderStyle: =BorderStyle.None
+                                          DropShadow: =DropShadow.None
+                                          Fill: =RGBA(8, 52, 100, 1)
+                                          Height: =50
+                                          LayoutAlignItems: =LayoutAlignItems.Center
+                                          LayoutDirection: =LayoutDirection.Horizontal
+                                          PaddingLeft: =10
+                                          Width: =Parent.Width
+                                        Children:
+                                          - lbl_Sidebar_Titulo_Escaladas:
+                                              Control: ModernText@1.0.0
+                                              Properties:
+                                                Color: =RGBA(255, 255, 255, 1)
+                                                FillPortions: =1
+                                                FontWeight: =FontWeight.Bold
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                Text: ="ROTAS ESCALADAS"
+                                          - btn_Rotas_CriarNova:
+                                              Control: ModernButton@1.0.0
+                                              Properties:
+                                                BasePaletteColor: =RGBA(11, 51, 82, 1)
+                                                BorderColor: =RGBA(255, 255, 255, 1)
+                                                BorderStyle: =BorderStyle.Solid
+                                                Height: =30
+                                                Icon: ="Add"
+                                                Layout: =ButtonLayout.IconOnly
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                OnSelect: |-
+                                                  =With(
+                                                      {
+                                                          prefixo: "Rota: nova rota personalizada ",
+                                                          proximoNumero: Coalesce(
+                                                              Max(
+                                                                  Filter(colRotas, StartsWith(Value, "Rota: nova rota personalizada ")),
+                                                                  Value(Substitute(Value, "Rota: nova rota personalizada ", ""))
+                                                              ),
+                                                              0
+                                                          ) + 1
+                                                      },
+                                                      With(
+                                                          { novaRotaNome: prefixo & Text(proximoNumero) },
+                                                          Collect(
+                                                              colRotas,
+                                                              {
+                                                                  Value: novaRotaNome,
+                                                                  status_rota: "Escalado"
+                                                              }
+                                                          );
+                                                          UpdateContext({ ctxRotaAtiva: novaRotaNome });
+                                                          Reset(tab_Rotas_ListaVertical_Escaladas)
+                                                      )
+                                                  )
+                                                Text: ="Nova rota"
+                                                Width: =30
+                                          - rec_Space_Sidebar_01_Escalados:
+                                              Control: Rectangle@2.3.0
+                                              Properties:
+                                                Height: =10
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                Width: =10
+                                          - btn_Rotas_LimparTodas:
+                                              Control: ModernButton@1.0.0
+                                              Properties:
+                                                BasePaletteColor: =RGBA(11, 51, 82, 1)
+                                                BorderColor: =RGBA(255, 255, 255, 1)
+                                                BorderStyle: =BorderStyle.Solid
+                                                Height: =30
+                                                Icon: ="DismissCircle"
+                                                Layout: =ButtonLayout.IconOnly
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                OnSelect: |
+                                                  =With(
+                                                      {
+                                                          prefixo: "Rota: nova rota personalizada ",
+                                                          proximoNumero: Coalesce(
+                                                              Max(
+                                                                  Filter(
+                                                                      colRotas,
+                                                                      StartsWith(Value, "Rota: nova rota personalizada ")
+                                                                  ),
+                                                                  Value(Substitute(Value, "Rota: nova rota personalizada ", ""))
+                                                              ),
+                                                              0
+                                                          ) + 1
+                                                      },
+                                                      With(
+                                                          { novaRotaNome: prefixo & Text(proximoNumero) },
+                                                          Collect(
+                                                              colRotas,
+                                                              { Value: novaRotaNome }
+                                                          );
+
+                                                          UpdateContext({ ctxRotaAtiva: novaRotaNome });
+
+                                                          Reset(tab_Rotas_ListaVertical_Escaladas)
+                                                      )
+                                                  )
+                                                Text: =
+                                                Width: =30
+                                          - rec_Space_Sidebar_02_Escalados:
+                                              Control: Rectangle@2.3.0
+                                              Properties:
+                                                Height: =10
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                Width: =10
+                                    - htm_Rotas_KPI_Escaladas:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          Height: =60
+                                          HtmlText: |-
+                                            =With(
+                                                {
+                                                    ordensEscaladas: Filter(colOrdens, status.Value = "Escalado")
+                                                },
+                                                With(
+                                                    {
+                                                        totRotas: CountRows(Distinct(Filter(ordensEscaladas, !IsBlank(rota_nome)), rota_nome)),
+                                                        totOS: CountRows(ordensEscaladas),
+                                                        totFaixas: Coalesce(Sum(ordensEscaladas, Value(faixas)), 0)
+                                                    },
+                                                    "<div style='
+                                                        font-family: Segoe UI, sans-serif;
+                                                        width: 274px;
+                                                        height: 48px;
+                                                        margin: 0 auto;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: space-between;
+                                                        background: #0C3B5E;
+                                                        border-radius: 6px;
+                                                        padding: 2px 2px;
+                                                        box-sizing: border-box;
+                                                        color: #ffffff;
+                                                        overflow: hidden;
+                                                        box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+                                                    '>
+                                                        <!-- Total de Rotas -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totRotas & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                Rotas
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Divisória vertical -->
+                                                        <div style='width: 1px; height: 18px; background: rgba(255,255,255,0.22);'></div>
+
+                                                        <!-- Total de OS -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totOS & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                OS
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Divisória vertical -->
+                                                        <div style='width: 1px; height: 18px; background: rgba(255,255,255,0.22);'></div>
+
+                                                        <!-- Total de Faixas -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totFaixas & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                Faixas
+                                                            </div>
+                                                        </div>
+                                                    </div>"
+                                                )
+                                            )
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =6
+                                          Width: =Parent.Width
+                                          Y: =50
+                              - tab_Rotas_ListaVertical_Escaladas:
+                                  Control: ModernTabList@1.0.2
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Center
+                                    Alignment: =LayoutDirection.Vertical
+                                    Appearance: =TabListAppearance.Subtle
+                                    Default: =Coalesce(LookUp(colRotas, Value = ctxRotaAtiva && status_rota = "Escalado"),Blank())
+                                    FillPortions: =1
+                                    Height: =80
+                                    Items: =Sort(Filter(colRotas, status_rota = "Escalado"), Value, SortOrder.Ascending)
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    OnChange: |-
+                                      =UpdateContext({ ctxRotaAtiva: Self.Selected.Value })
+                                    OnSelect: |-
+                                      =UpdateContext({ ctxRotaAtiva: Self.Selected.Value })
+                                    Size: =18
+                                    Width: =Parent.Width
+                        - con_Rotas_DetalheCard_Escaladas:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(227, 234, 243, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                            Children:
+                              - con_Rotas_Vazio_Escaladas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: AutoLayout
+                                  Properties:
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    PaddingBottom: =8
+                                    PaddingLeft: =8
+                                    PaddingRight: =8
+                                    PaddingTop: =8
+                                    Visible: =If(tab_Rotas_ListaVertical_Escaladas.Selected.Value = Blank(), true, false)
+                                  Children:
+                                    - ico_Placeholder_Vazio_Escaladas:
+                                        Control: Classic/Icon@2.5.0
+                                        Properties:
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Height: =91
+                                          Icon: =Icon.View
+                                          Width: =114
+                                          X: =127
+                                          Y: =198
+                                    - lbl_Placeholder_Titulo_Escaladas:
+                                        Control: Label@2.5.1
+                                        Properties:
+                                          Align: =Align.Center
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Font: =Font.'Open Sans'
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =45
+                                          Text: ="Nenhuma rota escalada."
+                                          Width: =365
+                                          X: =129
+                                          Y: =99
+                                    - lbl_Placeholder_Subtitulo_Escaladas:
+                                        Control: Label@2.5.1
+                                        Properties:
+                                          Align: =Align.Center
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Font: =Font.'Open Sans'
+                                          Height: =45
+                                          Text: ="Não há nenhuma rota no status de escalada."
+                                          Width: =365
+                                          X: =2
+                                          Y: =136
+                              - con_Rotas_DetalheHeader_Escaladas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    Fill: =RGBA(180, 214, 250, 0.23)
+                                    FillPortions: =0
+                                    Height: =110
+                                    LayoutMinHeight: =150
+                                    LayoutMinWidth: =16
+                                    Visible: =If(tab_Rotas_ListaVertical_Escaladas.Selected.Value = Blank(), false, true)
+                                    X: =40
+                                    Y: =40
+                                  Children:
+                                    - btn_Rotas_EditarNome_Escaladas:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          Height: =50
+                                          Icon: ="Edit"
+                                          IconStyle: =IconStyle.Filled
+                                          OnSelect: |-
+                                            =UpdateContext({ ctxEditarNomeRota : !ctxEditarNomeRota })
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =18
+                                          Text: =Upper(tab_Rotas_ListaVertical_Escaladas.Selected.Value)
+                                          Width: =728
+                                    - htm_Rotas_ResumoAtiva_Escaladas:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          Height: =60
+                                          HtmlText: |-
+                                            ="<div style='
+                                              font-family: Segoe UI, sans-serif;
+                                              width: 742px;
+                                              height: 52px;
+                                              display: flex;
+                                              align-items: center;
+                                              gap: 12px;
+                                              padding: 4px 8px;
+                                              box-sizing: border-box;
+                                              color: #0C3B5E;
+                                            '>
+                                              <!-- Coluna 1: Box Visual OS/Faixas (~20% = ~135px) -->
+                                              <div style='
+                                                width: 135px;
+                                                min-width: 135px;
+                                                height: 44px;
+                                                background: #0C3B5E;
+                                                border-radius: 8px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: space-evenly;
+                                                color: #ffffff;
+                                                box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+                                              '>
+                                                <div style='text-align: center;'>
+                                                  <div style='font-size: 14px; font-weight: 800; line-height: 14px;'>
+                                                    " & CountRows(gal_Rotas_ItensDaRota_Escaladas.AllItems) & "
+                                                  </div>
+                                                  <div style='font-size: 9px; font-weight: 600; opacity: 0.85; text-transform: uppercase;'>OS</div>
+                                                </div>
+                                                <div style='width: 1px; height: 24px; background: rgba(255,255,255,0.25);'></div>
+                                                <div style='text-align: center;'>
+                                                  <div style='font-size: 14px; font-weight: 800; line-height: 14px;'>
+                                                    " & Sum(gal_Rotas_ItensDaRota_Escaladas.AllItems, faixas) & "
+                                                  </div>
+                                                  <div style='font-size: 9px; font-weight: 600; opacity: 0.85; text-transform: uppercase;'>Faixas</div>
+                                                </div>
+                                              </div>
+
+                                              <!-- Divisória sutil vertical -->
+                                              <div style='width: 1px; height: 38px; background: #CBD5E1;'></div>
+
+                                              <!-- Coluna 2: Detalhamento Linhas Empresas e Municípios (~80%) -->
+                                              <div style='
+                                                flex: 1;
+                                                display: flex;
+                                                flex-direction: column;
+                                                justify-content: center;
+                                                gap: 4px;
+                                                overflow: hidden;
+                                              '>
+                                                <!-- Linha Empresas -->
+                                                <div style='display: flex; align-items: center; font-size: 11px; white-space: nowrap; overflow: hidden;'>
+                                                  <span style='font-weight: 700; color: #0F548C; font-size: 10px; margin-right: 6px; min-width: 70px;'>EMPRESAS:</span>
+                                                  <span style='overflow: hidden; text-overflow: ellipsis;'>" &
+                                                    Concat(
+                                                        AddColumns(
+                                                            Distinct(gal_Rotas_ItensDaRota_Escaladas.AllItems, empresa),
+                                                            totOS, CountRows(Filter(gal_Rotas_ItensDaRota_Escaladas.AllItems, empresa = Value)),
+                                                            totFaixas, Sum(Filter(gal_Rotas_ItensDaRota_Escaladas.AllItems, empresa = Value), Value(faixas))
+                                                        ),
+                                                        "<span style='background: #E3EAF3; border: 1px solid #B0C4DE; padding: 1px 6px; border-radius: 4px; margin-right: 4px;'><b>" & Value & "</b> (" & totOS & " OS · " & totFaixas & " fx)</span>",
+                                                        ""
+                                                    ) &
+                                                  "</span>
+                                                </div>
+
+                                                <!-- Linha Municípios -->
+                                                <div style='display: flex; align-items: center; font-size: 11px; white-space: nowrap; overflow: hidden;'>
+                                                  <span style='font-weight: 700; color: #0F548C; font-size: 10px; margin-right: 6px; min-width: 70px;'>MUNICÍPIOS:</span>
+                                                  <span style='overflow: hidden; text-overflow: ellipsis;'>" &
+                                                    Concat(
+                                                        AddColumns(
+                                                            Distinct(gal_Rotas_ItensDaRota_Escaladas.AllItems, municipio),
+                                                            totOS, CountRows(Filter(gal_Rotas_ItensDaRota_Escaladas.AllItems, municipio = Value)),
+                                                            totFaixas, Sum(Filter(gal_Rotas_ItensDaRota_Escaladas.AllItems, municipio = Value), Value(faixas))
+                                                        ),
+                                                        "<span style='background: #E3EAF3; border: 1px solid #B0C4DE; padding: 1px 6px; border-radius: 4px; margin-right: 4px;'><b>" & Value & "</b> (" & totOS & " OS · " & totFaixas & " fx)</span>",
+                                                        ""
+                                                    ) &
+                                                  "</span>
+                                                </div>
+                                              </div>
+                                            </div>"
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =4
+                                          Width: =728
+                                          Y: =50
+                                    - btn_Rotas_ExcluirAtiva_Escaladas:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          BasePaletteColor: =RGBA(11, 51, 82, 1)
+                                          BorderColor: =RGBA(255, 255, 255, 1)
+                                          BorderStyle: =BorderStyle.Solid
+                                          Height: =30
+                                          Icon: ="Delete"
+                                          Layout: =ButtonLayout.IconOnly
+                                          OnSelect: |-
+                                            =If(
+                                                !IsBlank(tab_Rotas_ListaVertical_Escaladas.Selected.Value),
+                                                UpdateIf(
+                                                    colOrdens,
+                                                    rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value,
+                                                    {
+                                                        rota_nome: Blank(),
+                                                        ordem_agendamento: Blank(),
+                                                        hora_agend: Blank(),
+                                                        status: { Value: "Pendente" }
+                                                    }
+                                                );
+
+                                                Remove(
+                                                    colRotas,
+                                                    LookUp(colRotas, Value = tab_Rotas_ListaVertical_Escaladas.Selected.Value)
+                                                )
+                                            )
+                                          Text: =
+                                          Width: =30
+                                          X: =687
+                                          Y: =10
+                              - rec_Space_Footer_01_Escalados:
+                                  Control: Rectangle@2.3.0
+                                  Properties:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Height: =10
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    Visible: =If(tab_Rotas_ListaVertical_Escaladas.Selected.Value = Blank(), false, true)
+                              - gal_Rotas_ItensDaRota_Escaladas:
+                                  Control: Gallery@2.15.0
+                                  Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                                  Properties:
+                                    Height: =Parent.Height - 10
+                                    Items: =SortByColumns(Filter(colOrdens, rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value And status.Value = "Escalado"), "ordem_agendamento" , SortOrder.Ascending)
+                                    TemplateSize: =120
+                                    Transition: =Transition.Pop
+                                    Visible: =If(tab_Rotas_ListaVertical_Escaladas.Selected.Value = Blank(), false, true)
+                                    Width: =Parent.Width
+                                    Y: =
+                                  Children:
+                                    - con_ItemOS_Card_NaRota:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: ManualLayout
+                                        Properties:
+                                          DropShadow: =DropShadow.None
+                                          Fill: =RGBA(227, 234, 243, 1)
+                                          Height: =110
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Width: =690
+                                          X: =20
+                                    - ico_ItemOS_Hora_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Clock"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =15
+                                    - drp_ItemOS_Hora_Escaladas:
+                                        Control: ModernDropdown@1.0.3
+                                        Properties:
+                                          Default: |-
+                                            ={ Value: Coalesce(ThisItem.hora_agend, "") }
+                                          Height: =25
+                                          ItemDisplayText: =ThisItem.Value
+                                          Items: =["","08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00"]
+                                          OnChange: |-
+                                            =Patch(colOrdens, ThisItem, {hora_agend: Self.Selected.Value})
+                                          Width: =82
+                                          X: =112
+                                          Y: =15
+                                    - ico_ItemOS_EmpresaCard_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="BuildingRetail"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =199
+                                          Y: =15
+                                    - lbl_ItemOS_Empresa_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(15, 84, 140, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.empresa
+                                          X: =224
+                                          Y: =15
+                                    - ico_ItemOS_SerieCard_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="CameraDome"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =374
+                                          Y: =15
+                                    - lbl_ItemOS_Serie_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 0.5)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.n_serie
+                                          Width: =120
+                                          X: =399
+                                          Y: =15
+                                    - lbl_ItemOS_Faixas_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(0, 81, 100, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.faixas
+                                          Width: =30
+                                          X: =524
+                                          Y: =15
+                                    - lbl_ItemOS_NumOS_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.n_os
+                                          Width: =100
+                                          X: =559
+                                          Y: =15
+                                    - btn_ItemOS_RemoverDaRota:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Fill: =RGBA(215, 58, 60, 1)
+                                          Height: =25
+                                          Icon: ="Delete"
+                                          IconColor: =RGBA(255, 255, 255, 1)
+                                          IconStyle: =IconStyle.Filled
+                                          OnSelect: |-
+                                            =Patch(
+                                                colOrdens,
+                                                ThisItem,
+                                                {
+                                                    ordem_agendamento: Blank(),
+                                                    hora_agend: Blank(),
+                                                    rota_nome: Blank(),
+                                                    status: { Value: "Pendente" }
+                                                }
+                                            );
+
+                                            ForAll(
+                                                Sequence(
+                                                    CountRows(Filter(colOrdens, rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value))
+                                                ),
+                                                Patch(
+                                                    colOrdens,
+                                                    Index(
+                                                        Sort(
+                                                            Filter(colOrdens, rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value),
+                                                            ordem_agendamento,
+                                                            SortOrder.Ascending
+                                                        ),
+                                                        Value
+                                                    ),
+                                                    { ordem_agendamento: Value }
+                                                )
+                                            )
+                                          PaddingBottom: =5
+                                          PaddingLeft: =5
+                                          PaddingRight: =5
+                                          PaddingTop: =5
+                                          RadiusBottomLeft: =255
+                                          RadiusBottomRight: =255
+                                          RadiusTopLeft: =255
+                                          RadiusTopRight: =255
+                                          Width: =25
+                                          X: =672
+                                          Y: =10
+                                    - ico_ItemOS_EnderecoCard_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Location"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =44
+                                    - lbl_ItemOS_Endereco_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.loc_ver
+                                          Width: =585
+                                          Wrap: =false
+                                          X: =112
+                                          Y: =44
+                                    - ico_ItemOS_MunicipioCard_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Building"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =69
+                                    - lbl_ItemOS_Municipio_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.municipio
+                                          VerticalAlign: =VerticalAlign.Bottom
+                                          Width: =300
+                                          Wrap: =false
+                                          X: =112
+                                          Y: =69
+                                    - ico_ItemOS_VencCard_Escaladas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =15
+                                          Icon: ="Tag"
+                                          OnSelect: =Select(Parent)
+                                          Width: =15
+                                          X: =553
+                                          Y: =89
+                                    - lbl_ItemOS_Venc_Escaladas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Lighter
+                                          Height: =15
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: |-
+                                            ="Vencimento: " & ThisItem.vencimento
+                                          Width: =125
+                                          Wrap: =false
+                                          X: =572
+                                          Y: =89
+                                    - con_ItemOS_ControlesOrdem_Escaladas:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: AutoLayout
+                                        Properties:
+                                          DropShadow: =DropShadow.None
+                                          Fill: =RGBA(12, 59, 94, 1)
+                                          Height: =80
+                                          LayoutAlignItems: =LayoutAlignItems.Center
+                                          LayoutDirection: =LayoutDirection.Vertical
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Width: =40
+                                          X: =35
+                                          Y: =16
+                                        Children:
+                                          - btn_ItemOS_OrdemSubir:
+                                              Control: ModernIcon@1.1.1
+                                              Properties:
+                                                DisplayMode: =If(ThisItem.ordem_agendamento = 1, DisplayMode.View, DisplayMode.Edit)
+                                                Height: =40
+                                                Icon: ="ChevronUp"
+                                                IconColor: =RGBA(255, 255, 255, 1)
+                                                OnSelect: |-
+                                                  =Patch(
+                                                      colOrdens,
+                                                      LookUp(colOrdens, rota_nome = ThisItem.rota_nome && ordem_agendamento = ThisItem.ordem_agendamento - 1),
+                                                      { ordem_agendamento: ThisItem.ordem_agendamento }
+                                                  );
+                                                  Patch(
+                                                      colOrdens,
+                                                      ThisItem,
+                                                      { ordem_agendamento: ThisItem.ordem_agendamento - 1 }
+                                                  )
+                                                Width: =40
+                                          - btn_ItemOS_OrdemDescer:
+                                              Control: ModernIcon@1.1.1
+                                              Properties:
+                                                DisplayMode: |-
+                                                  =If(
+                                                      ThisItem.ordem_agendamento >= Max(
+                                                          Filter(colOrdens, rota_nome = ThisItem.rota_nome),
+                                                          ordem_agendamento
+                                                      ),
+                                                      DisplayMode.View,
+                                                      DisplayMode.Edit
+                                                  )
+                                                Height: =40
+                                                Icon: ="ChevronDown"
+                                                IconColor: =RGBA(255, 255, 255, 1)
+                                                OnSelect: |-
+                                                  =Patch(
+                                                      colOrdens,
+                                                      LookUp(colOrdens, rota_nome = ThisItem.rota_nome && ordem_agendamento = ThisItem.ordem_agendamento + 1),
+                                                      { ordem_agendamento: ThisItem.ordem_agendamento }
+                                                  );
+                                                  Patch(
+                                                      colOrdens,
+                                                      ThisItem,
+                                                      { ordem_agendamento: ThisItem.ordem_agendamento + 1 }
+                                                  )
+                                                Width: =40
+                              - con_Rotas_AcoesFooter_Escaladas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: AutoLayout
+                                  Properties:
+                                    Fill: =RGBA(12, 59, 94, 1)
+                                    FillPortions: =0
+                                    Height: =50
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Horizontal
+                                    PaddingBottom: =8
+                                    PaddingLeft: =8
+                                    PaddingRight: =8
+                                    PaddingTop: =8
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Visible: =If(tab_Rotas_ListaVertical_Escaladas.Selected.Value = Blank(), false, true)
+                                    X: =40
+                                    Y: =40
+                                  Children:
+                                    - btn_Rotas_AbrirGoogleMaps:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          BasePaletteColor: =RGBA(141, 229, 250, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Icon: ="NavigationLocationTarget"
+                                          IconStyle: =IconStyle.Filled
+                                          LayoutMinHeight: =16
+                                          LayoutMinWidth: =16
+                                          OnSelect: |-
+                                            =Launch(
+                                                "https://www.google.com/maps/dir/" & 
+                                                Concat(
+                                                    gal_Rotas_ItensDaRota_Escaladas.AllItems, 
+                                                    EncodeUrl(loc_ver), 
+                                                    "/"
+                                                )
+                                            )
+                                          Size: =12
+                                          Text: ="Visualizar no Google Maps"
+                                          Width: =200
+                                    - rec_Space_Footer_02_Escalados:
+                                        Control: Rectangle@2.3.0
+                                        Properties:
+                                          Fill: =RGBA(0, 0, 0, 0)
+                                          Height: =10
+                                          LayoutMinHeight: =16
+                                          LayoutMinWidth: =16
+                                          Width: =10
+                                    - btn_Rotas_LancarRota:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          BasePaletteColor: =RGBA(78, 145, 78, 1)
+                                          FillPortions: =1
+                                          FontWeight: =FontWeight.Bold
+                                          Icon: ="CheckmarkCircle"
+                                          IconStyle: =IconStyle.Filled
+                                          LayoutMinHeight: =16
+                                          LayoutMinWidth: =16
+                                          OnSelect: |-
+                                            =With(
+                                                {
+                                                    nomeRotaAtual: tab_Rotas_ListaVertical_Escaladas.Selected.Value,
+                                                    itensRota: Filter(
+                                                        colOrdens,
+                                                        rota_nome = tab_Rotas_ListaVertical_Escaladas.Selected.Value && status.Value = "Escalado"
+                                                    )
+                                                },
+                                                If(
+                                                    StartsWith(nomeRotaAtual, "Rota: nova rota personalizada"),
+                                                    Notify("Por favor, renomeie a rota antes de lançar.", NotificationType.Warning, 2000),
+
+                                                    IsEmpty(itensRota) || CountIf(itensRota, !IsBlank(Trim(hora_agend))) = 0,
+                                                    Notify("Você está lançando a rota sem definir nenhum horário! Defina ao menos um horário para lançar.", NotificationType.Warning, 2000),
+
+                                                    UpdateIf(
+                                                        colOrdens,
+                                                        rota_nome = nomeRotaAtual && status.Value = "Escalado",
+                                                        { status: { Value: "Agendado" } }
+                                                    );
+                                                    Patch(
+                                                        colRotas,
+                                                        LookUp(colRotas, Value = nomeRotaAtual),
+                                                        { status_rota: "Agendado" }
+                                                    );
+                                                    UpdateContext({ ctxRotaAtiva: Blank() });
+                                                    Reset(tab_Rotas_ListaVertical_Escaladas)
+                                                )
+                                            )
+                                          Size: =12
+                                          Text: ="Lançar rota"
+                                          Width: =200
+                  - con_Rotas_AbaLancadas_Miolo:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        Visible: =StartsWith(tab_Rotas_TipoVisualizacao.Selected.Value, "LANÇADAS")
+                      Children:
+                        - con_Rotas_Sidebar_Lancadas:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(227, 234, 243, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =280
+                            Children:
+                              - con_Rotas_SidebarHeader_Lancadas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    Fill: =RGBA(180, 214, 250, 0.22)
+                                    FillPortions: =0
+                                    Height: =110
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                  Children:
+                                    - con_Rotas_TopButtons_Lancadas:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: AutoLayout
+                                        Properties:
+                                          BorderStyle: =BorderStyle.None
+                                          DropShadow: =DropShadow.None
+                                          Fill: =RGBA(8, 52, 100, 1)
+                                          Height: =50
+                                          LayoutAlignItems: =LayoutAlignItems.Center
+                                          LayoutDirection: =LayoutDirection.Horizontal
+                                          PaddingLeft: =10
+                                          Width: =Parent.Width
+                                        Children:
+                                          - lbl_Sidebar_Titulo_Lancadas:
+                                              Control: ModernText@1.0.0
+                                              Properties:
+                                                Color: =RGBA(255, 255, 255, 1)
+                                                FillPortions: =1
+                                                FontWeight: =FontWeight.Bold
+                                                LayoutMinHeight: =16
+                                                LayoutMinWidth: =16
+                                                Text: ="ROTAS LANÇADAS"
+                                    - htm_Rotas_KPI_Lancadas:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          Height: =60
+                                          HtmlText: |-
+                                            =With(
+                                                {
+                                                    ordensAgendadas: Filter(colOrdens, status.Value = "Agendado")
+                                                },
+                                                With(
+                                                    {
+                                                        totRotas: CountRows(Distinct(Filter(ordensAgendadas, !IsBlank(rota_nome)), rota_nome)),
+                                                        totOS: CountRows(ordensAgendadas),
+                                                        totFaixas: Coalesce(Sum(ordensAgendadas, Value(faixas)), 0)
+                                                    },
+                                                    "<div style='
+                                                        font-family: Segoe UI, sans-serif;
+                                                        width: 274px;
+                                                        height: 48px;
+                                                        margin: 0 auto;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: space-between;
+                                                        background: #0C3B5E;
+                                                        border-radius: 6px;
+                                                        padding: 2px 2px;
+                                                        box-sizing: border-box;
+                                                        color: #ffffff;
+                                                        overflow: hidden;
+                                                        box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+                                                    '>
+                                                        <!-- Total de Rotas -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totRotas & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                Rotas
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Divisória vertical -->
+                                                        <div style='width: 1px; height: 18px; background: rgba(255,255,255,0.22);'></div>
+
+                                                        <!-- Total de OS -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totOS & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                OS
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Divisória vertical -->
+                                                        <div style='width: 1px; height: 18px; background: rgba(255,255,255,0.22);'></div>
+
+                                                        <!-- Total de Faixas -->
+                                                        <div style='flex: 1; text-align: center;'>
+                                                            <div style='font-size: 13px; font-weight: 800; line-height: 13px;'>
+                                                                " & totFaixas & "
+                                                            </div>
+                                                            <div style='font-size: 8px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 1px;'>
+                                                                Faixas
+                                                            </div>
+                                                        </div>
+                                                    </div>"
+                                                )
+                                            )
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =6
+                                          Width: =Parent.Width
+                                          Y: =50
+                              - tab_Rotas_ListaVertical_Lancadas:
+                                  Control: ModernTabList@1.0.2
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Center
+                                    Alignment: =LayoutDirection.Vertical
+                                    Appearance: =TabListAppearance.Subtle
+                                    Default: =Blank()
+                                    FillPortions: =1
+                                    Height: =80
+                                    Items: =Sort(Filter(colRotas, status_rota = "Agendado"), Value, SortOrder.Ascending)
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    OnChange: =
+                                    OnSelect: =
+                                    Size: =18
+                                    Width: =Parent.Width
+                        - con_Rotas_DetalheCard_Lancadas:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(227, 234, 243, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                            Children:
+                              - con_Rotas_Vazio_Lancadas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: AutoLayout
+                                  Properties:
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    PaddingBottom: =8
+                                    PaddingLeft: =8
+                                    PaddingRight: =8
+                                    PaddingTop: =8
+                                    Visible: =If(tab_Rotas_ListaVertical_Lancadas.Selected.Value = Blank(), true, false)
+                                  Children:
+                                    - ico_Placeholder_Vazio_Lancadas:
+                                        Control: Classic/Icon@2.5.0
+                                        Properties:
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Height: =91
+                                          Icon: =Icon.View
+                                          Width: =114
+                                          X: =127
+                                          Y: =198
+                                    - lbl_Placeholder_Titulo_Lancadas:
+                                        Control: Label@2.5.1
+                                        Properties:
+                                          Align: =Align.Center
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Font: =Font.'Open Sans'
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =45
+                                          Text: ="Nenhuma rota lançada."
+                                          Width: =365
+                                          X: =129
+                                          Y: =99
+                                    - lbl_Placeholder_Subtitulo_Lancadas:
+                                        Control: Label@2.5.1
+                                        Properties:
+                                          Align: =Align.Center
+                                          BorderColor: =RGBA(0, 18, 107, 1)
+                                          Color: =RGBA(39, 67, 125, 1)
+                                          Font: =Font.'Open Sans'
+                                          Height: =45
+                                          Text: |-
+                                            ="Não há nenhuma rota no status de 
+                                            lançada."
+                                          Width: =365
+                                          X: =2
+                                          Y: =136
+                              - con_Rotas_DetalheHeader_Lancadas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    Fill: =RGBA(180, 214, 250, 0.23)
+                                    FillPortions: =0
+                                    Height: =110
+                                    LayoutMinHeight: =150
+                                    LayoutMinWidth: =16
+                                    Visible: =If(tab_Rotas_ListaVertical_Lancadas.Selected.Value = Blank(), false, true)
+                                    X: =40
+                                    Y: =40
+                                  Children:
+                                    - htm_Rotas_ResumoAtiva_Lancadas:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          Height: =60
+                                          HtmlText: |-
+                                            ="<div style='
+                                              font-family: Segoe UI, sans-serif;
+                                              width: 742px;
+                                              height: 52px;
+                                              display: flex;
+                                              align-items: center;
+                                              gap: 12px;
+                                              padding: 4px 8px;
+                                              box-sizing: border-box;
+                                              color: #0C3B5E;
+                                            '>
+                                              <!-- Coluna 1: Box Visual OS/Faixas (~20% = ~135px) -->
+                                              <div style='
+                                                width: 135px;
+                                                min-width: 135px;
+                                                height: 44px;
+                                                background: #0C3B5E;
+                                                border-radius: 8px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: space-evenly;
+                                                color: #ffffff;
+                                                box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+                                              '>
+                                                <div style='text-align: center;'>
+                                                  <div style='font-size: 14px; font-weight: 800; line-height: 14px;'>
+                                                    " & CountRows(gal_Rotas_ItensDaRota_Lancadas.AllItems) & "
+                                                  </div>
+                                                  <div style='font-size: 9px; font-weight: 600; opacity: 0.85; text-transform: uppercase;'>OS</div>
+                                                </div>
+                                                <div style='width: 1px; height: 24px; background: rgba(255,255,255,0.25);'></div>
+                                                <div style='text-align: center;'>
+                                                  <div style='font-size: 14px; font-weight: 800; line-height: 14px;'>
+                                                    " & Sum(gal_Rotas_ItensDaRota_Lancadas.AllItems, faixas) & "
+                                                  </div>
+                                                  <div style='font-size: 9px; font-weight: 600; opacity: 0.85; text-transform: uppercase;'>Faixas</div>
+                                                </div>
+                                              </div>
+
+                                              <!-- Divisória sutil vertical -->
+                                              <div style='width: 1px; height: 38px; background: #CBD5E1;'></div>
+
+                                              <!-- Coluna 2: Detalhamento Linhas Empresas e Municípios (~80%) -->
+                                              <div style='
+                                                flex: 1;
+                                                display: flex;
+                                                flex-direction: column;
+                                                justify-content: center;
+                                                gap: 4px;
+                                                overflow: hidden;
+                                              '>
+                                                <!-- Linha Empresas -->
+                                                <div style='display: flex; align-items: center; font-size: 11px; white-space: nowrap; overflow: hidden;'>
+                                                  <span style='font-weight: 700; color: #0F548C; font-size: 10px; margin-right: 6px; min-width: 70px;'>EMPRESAS:</span>
+                                                  <span style='overflow: hidden; text-overflow: ellipsis;'>" &
+                                                    Concat(
+                                                        AddColumns(
+                                                            Distinct(gal_Rotas_ItensDaRota_Lancadas.AllItems, empresa),
+                                                            totOS, CountRows(Filter(gal_Rotas_ItensDaRota_Lancadas.AllItems, empresa = Value)),
+                                                            totFaixas, Sum(Filter(gal_Rotas_ItensDaRota_Lancadas.AllItems, empresa = Value), Value(faixas))
+                                                        ),
+                                                        "<span style='background: #E3EAF3; border: 1px solid #B0C4DE; padding: 1px 6px; border-radius: 4px; margin-right: 4px;'><b>" & Value & "</b> (" & totOS & " OS · " & totFaixas & " fx)</span>",
+                                                        ""
+                                                    ) &
+                                                  "</span>
+                                                </div>
+
+                                                <!-- Linha Municípios -->
+                                                <div style='display: flex; align-items: center; font-size: 11px; white-space: nowrap; overflow: hidden;'>
+                                                  <span style='font-weight: 700; color: #0F548C; font-size: 10px; margin-right: 6px; min-width: 70px;'>MUNICÍPIOS:</span>
+                                                  <span style='overflow: hidden; text-overflow: ellipsis;'>" &
+                                                    Concat(
+                                                        AddColumns(
+                                                            Distinct(gal_Rotas_ItensDaRota_Lancadas.AllItems, municipio),
+                                                            totOS, CountRows(Filter(gal_Rotas_ItensDaRota_Lancadas.AllItems, municipio = Value)),
+                                                            totFaixas, Sum(Filter(gal_Rotas_ItensDaRota_Lancadas.AllItems, municipio = Value), Value(faixas))
+                                                        ),
+                                                        "<span style='background: #E3EAF3; border: 1px solid #B0C4DE; padding: 1px 6px; border-radius: 4px; margin-right: 4px;'><b>" & Value & "</b> (" & totOS & " OS · " & totFaixas & " fx)</span>",
+                                                        ""
+                                                    ) &
+                                                  "</span>
+                                                </div>
+                                              </div>
+                                            </div>"
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =4
+                                          Width: =728
+                                          Y: =50
+                                    - lbl_Rotas_NomeAtiva_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(8, 52, 100, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =50
+                                          Size: =18
+                                          Text: =Upper(tab_Rotas_ListaVertical_Lancadas.Selected.Value)
+                                          Width: =728
+                                    - btn_Rotas_Desbloquear_Lancadas:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          BasePaletteColor: =RGBA(11, 51, 82, 1)
+                                          BorderColor: =RGBA(255, 255, 255, 1)
+                                          BorderStyle: =BorderStyle.Solid
+                                          Height: =30
+                                          Icon: ="LockOpen"
+                                          Layout: =ButtonLayout.IconOnly
+                                          OnSelect: |-
+                                            =With(
+                                                {
+                                                    rotaAlvo: tab_Rotas_ListaVertical_Lancadas.Selected.Value
+                                                },
+                                                If(
+                                                    !IsBlank(rotaAlvo),
+                                                    UpdateIf(
+                                                        colOrdens,
+                                                        rota_nome = rotaAlvo && status.Value = "Agendado",
+                                                        { status: { Value: "Escalado" } }
+                                                    );
+                                                    Patch(
+                                                        colRotas,
+                                                        LookUp(colRotas, Value = rotaAlvo),
+                                                        { status_rota: "Escalado" }
+                                                    );
+                                                    UpdateContext({ ctxRotaAtiva: rotaAlvo });
+                                                    Reset(tab_Rotas_ListaVertical_Lancadas);
+                                                    Reset(tab_Rotas_ListaVertical_Escaladas)
+                                                )
+                                            )
+                                          Text: =
+                                          Width: =30
+                                          X: =687
+                                          Y: =10
+                              - rec_Space_Footer_03_Escalados:
+                                  Control: Rectangle@2.3.0
+                                  Properties:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Height: =10
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    Visible: =If(tab_Rotas_ListaVertical_Lancadas.Selected.Value = Blank(), false, true)
+                              - gal_Rotas_ItensDaRota_Lancadas:
+                                  Control: Gallery@2.15.0
+                                  Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                                  Properties:
+                                    Height: =Parent.Height - 10
+                                    Items: =SortByColumns(Filter(colOrdens, rota_nome = tab_Rotas_ListaVertical_Lancadas.Selected.Value And status.Value = "Agendado"), "ordem_agendamento" , SortOrder.Ascending)
+                                    TemplateSize: =120
+                                    Transition: =Transition.Push
+                                    Visible: =If(tab_Rotas_ListaVertical_Lancadas.Selected.Value = Blank(), false, true)
+                                    Width: =Parent.Width
+                                    Y: =
+                                  Children:
+                                    - con_ItemOS_Card_Lancadas:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: ManualLayout
+                                        Properties:
+                                          DropShadow: =DropShadow.None
+                                          Fill: =RGBA(227, 234, 243, 1)
+                                          Height: =110
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Width: =690
+                                          X: =20
+                                    - ico_ItemOS_Hora_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Clock"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =15
+                                    - drp_ItemOS_Hora_Lancadas:
+                                        Control: ModernDropdown@1.0.3
+                                        Properties:
+                                          Default: |-
+                                            ={ Value: Coalesce(ThisItem.hora_agend, "") }
+                                          Height: =25
+                                          ItemDisplayText: =ThisItem.Value
+                                          Items: =["","08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00"]
+                                          OnChange: |-
+                                            =Patch(colOrdens, ThisItem, {hora_agend: Self.Selected.Value})
+                                          Width: =82
+                                          X: =112
+                                          Y: =15
+                                    - ico_ItemOS_EmpresaCard_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="BuildingRetail"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =199
+                                          Y: =15
+                                    - lbl_ItemOS_Empresa_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(15, 84, 140, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.empresa
+                                          X: =224
+                                          Y: =15
+                                    - ico_ItemOS_SerieCard_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="CameraDome"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =374
+                                          Y: =15
+                                    - lbl_ItemOS_Serie_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 0.5)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.n_serie
+                                          Width: =120
+                                          X: =399
+                                          Y: =15
+                                    - lbl_ItemOS_Faixas_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(0, 81, 100, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.faixas
+                                          Width: =30
+                                          X: =524
+                                          Y: =15
+                                    - lbl_ItemOS_NumOS_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.n_os
+                                          Width: =100
+                                          X: =559
+                                          Y: =15
+                                    - ico_ItemOS_EnderecoCard_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Location"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =44
+                                    - lbl_ItemOS_Endereco_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.loc_ver
+                                          Width: =585
+                                          Wrap: =false
+                                          X: =112
+                                          Y: =44
+                                    - ico_ItemOS_MunicipioCard_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Building"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =81
+                                          Y: =69
+                                    - lbl_ItemOS_Municipio_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.municipio
+                                          VerticalAlign: =VerticalAlign.Bottom
+                                          Width: =300
+                                          Wrap: =false
+                                          X: =112
+                                          Y: =69
+                                    - ico_ItemOS_VencCard_Lancadas:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =15
+                                          Icon: ="Tag"
+                                          OnSelect: =Select(Parent)
+                                          Width: =15
+                                          X: =553
+                                          Y: =89
+                                    - lbl_ItemOS_Venc_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Lighter
+                                          Height: =15
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: |-
+                                            ="Vencimento: " & ThisItem.vencimento
+                                          Width: =125
+                                          Wrap: =false
+                                          X: =572
+                                          Y: =89
+                                    - lbl_ItemOS_OrdemBadge_Lancadas:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(0, 81, 100, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =80
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Text: =ThisItem.ordem_agendamento & "º"
+                                          Width: =40
+                                          X: =35
+                                          Y: =16
+                              - con_Rotas_AcoesFooter_Lancadas:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: AutoLayout
+                                  Properties:
+                                    Fill: =RGBA(12, 59, 94, 1)
+                                    FillPortions: =0
+                                    Height: =50
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Horizontal
+                                    PaddingBottom: =8
+                                    PaddingLeft: =8
+                                    PaddingRight: =8
+                                    PaddingTop: =8
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Visible: =If(tab_Rotas_ListaVertical_Lancadas.Selected.Value = Blank(), false, true)
+                                    X: =40
+                                    Y: =40
+                                  Children:
+                                    - btn_Rotas_AbrirMaps_Lancadas:
+                                        Control: ModernButton@1.0.0
+                                        Properties:
+                                          BasePaletteColor: =RGBA(141, 229, 250, 1)
+                                          FillPortions: =1
+                                          FontWeight: =FontWeight.Bold
+                                          Icon: ="NavigationLocationTarget"
+                                          IconStyle: =IconStyle.Filled
+                                          LayoutMinHeight: =16
+                                          LayoutMinWidth: =16
+                                          OnSelect: |-
+                                            =Launch(
+                                                "https://www.google.com/maps/dir/" & 
+                                                Concat(
+                                                    gal_Rotas_ItensDaRota_Lancadas.AllItems, 
+                                                    EncodeUrl(loc_ver), 
+                                                    "/"
+                                                )
+                                            )
+                                          Size: =12
+                                          Text: ="Visualizar no Google Maps"
+                                          Width: =200
+            - img_Rotas_MapaEstatico:
+                Control: Image@2.2.3
+                Properties:
+                  Image: |-
+                    ="https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=872&height=355" &
+                    "&marker=lonlat:-45.8900,-23.2000;text:1;color:%230078d4|" &
+                    "lonlat:-45.8850,-23.1950;text:2;color:%230078d4|" &
+                    "lonlat:-45.8800,-23.1900;text:3;color:%230078d4|" &
+                    "lonlat:-45.8750,-23.1850;text:4;color:%230078d4|" &
+                    "lonlat:-45.8700,-23.1800;text:5;color:%230078d4|" &
+                    "lonlat:-45.8650,-23.1750;text:6;color:%230078d4|" &
+                    "lonlat:-45.8600,-23.1700;text:7;color:%230078d4|" &
+                    "lonlat:-45.8550,-23.1650;text:8;color:%230078d4" &
+                    "&geometry=polyline:-45.8900,-23.2000,-45.8850,-23.1950,-45.8800,-23.1900,-45.8750,-23.1850,-45.8700,-23.1800,-45.8650,-23.1750,-45.8600,-23.1700,-45.8550,-23.1650;linewidth:3;linecolor:%23e81123" &
+                    "&apiKey=babcda79b8b24371a539bd9de737bde4"
+                  LayoutGridColumnEnd: =49
+                  LayoutGridColumnStart: =27
+                  LayoutGridRowEnd: =10
+                  LayoutGridRowStart: =1
+                  RadiusBottomLeft: =25
+                  RadiusBottomRight: =25
+                  RadiusTopLeft: =25
+                  RadiusTopRight: =25
+                  Visible: =false
+                  X: =40
+                  Y: =40
+      - con_Popup_RenomearRota:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =50
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =5
+            PaddingLeft: =10
+            PaddingRight: =5
+            PaddingTop: =5
+            Visible: =ctxEditarNomeRota
+            X: =304
+            Y: =169
+          Children:
+            - txt_input_nome_rota:
+                Control: ModernTextInput@1.1.2
+                Properties:
+                  Default: =Upper(tab_Rotas_ListaVertical_Escaladas.Selected.Value)
+                  FillPortions: =1
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  Placeholder: =
+                  Size: =16
+            - ico_Popup_SalvarNovoNomeRota:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  Height: =40
+                  Icon: ="Save"
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: |-
+                    =If(
+                        !IsBlank(tab_Rotas_ListaVertical_Escaladas.Selected.Value) && !IsBlank(Trim(txt_input_nome_rota.Text)),
+                        With(
+                            {
+                                nomeAntigo: tab_Rotas_ListaVertical_Escaladas.Selected.Value,
+                                novoNome: Upper(Trim(txt_input_nome_rota.Text))
+                            },
+                            UpdateIf(
+                                colRotas,
+                                Value = nomeAntigo,
+                                { Value: novoNome }
+                            );
+
+                            UpdateIf(
+                                colOrdens,
+                                rota_nome = nomeAntigo,
+                                { rota_nome: novoNome }
+                            );
+
+                            UpdateContext({ ctxRotaAtiva: novoNome });
+                            Reset(txt_input_nome_rota);
+                            Reset(tab_Rotas_ListaVertical_Escaladas);
+                            UpdateContext({ ctxEditarNomeRota: !ctxEditarNomeRota })
+                        )
+                    )
+                  PaddingBottom: =5
+                  PaddingLeft: =5
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Width: =40
+      - con_Popup_Pesquisa_Escalados:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =70
+            Visible: =ctxPesquisarOS
+            X: =1280
+            Y: =110
+          Children:
+            - con_Popup_CaixaInput_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                Children:
+                  - txt_Popup_BuscaEndereco_Escalados:
+                      Control: ModernTextInput@1.1.2
+                      Properties:
+                        FillPortions: =1
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Placeholder: ="Pesquisar endereço:"
+                  - ico_Popup_LimparBusca_Escalados:
+                      Control: ModernIcon@1.1.1
+                      Properties:
+                        Icon: ="Dismiss"
+                        IconColor: =RGBA(122, 138, 143, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Reset(txt_Popup_BuscaEndereco_Escalados)
+                        Visible: =!IsBlank(txt_Popup_BuscaEndereco_Escalados.Text)
+            - ico_Popup_FecharBusca_Escalados:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxPesquisarOS: !ctxPesquisarOS })
+                  Width: =500
+                  Y: =50
+      - con_Popup_Filtros_Escalados:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =170
+            Visible: =ctxFiltrarOS
+            X: =1320
+            Y: =190
+          Children:
+            - con_Filtro_Municipio_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                Children:
+                  - lbl_Filtro_Municipio_Escalados:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Município"
+                        Width: =120
+                  - rec_Sep_Municipio_Escalados:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Municipio_Escalados:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(municipio)),
+                                  municipio
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar municípios"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(municipio)),
+                                  municipio
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - con_Filtro_Empresa_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Y: =50
+                Children:
+                  - lbl_Filtro_Empresa_Escalados:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Empresa"
+                        Width: =120
+                  - rec_Sep_Empresa_Escalados:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Empresa_Escalados:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(empresa)),
+                                  empresa
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar empresas"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(empresa)),
+                                  empresa
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - con_Filtro_Agente_Escalados:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Y: =100
+                Children:
+                  - lbl_Filtro_Agente_Escalados:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Agente de mob."
+                        Width: =120
+                  - rec_Sep_Agente_Escalados:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Agente_Escalados:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(agente_mob)),
+                                  agente_mob
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar agente de mobilidade"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(agente_mob)),
+                                  agente_mob
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - ico_Popup_FecharFiltros_Escalados:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxFiltrarOS: !ctxFiltrarOS })
+                  Width: =500
+                  Y: =150
+      - con_Popup_Ordenar_Escalados:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =70
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =5
+            PaddingLeft: =10
+            PaddingRight: =5
+            PaddingTop: =5
+            Visible: =ctxOrdenarOS
+            Width: =350
+            X: =1526
+            Y: =110
+          Children:
+            - drp_Popup_Ordenar_Escalados:
+                Control: ModernDropdown@1.0.3
+                Properties:
+                  Default: |-
+                    ={ NomeExibicao: "Ordenar por nº da OS", Coluna: "n_os" }
+                  Height: =40
+                  ItemDisplayText: =ThisItem.NomeExibicao
+                  Items: |-
+                    =Table(
+                        { NomeExibicao: "Ordenar por nº da OS", Coluna: "n_os" },
+                        { NomeExibicao: "Ordenar por endereço (A a Z)", Coluna: "loc_ver" },
+                        { NomeExibicao: "Ordenar por município (A a Z)", Coluna: "municipio" },
+                        { NomeExibicao: "Ordenar por empresa (A a Z)", Coluna: "empresa" },
+                        { NomeExibicao: "Ordenar por agente de mobilidade (A a Z)", Coluna: "agente_mob" }
+                    )
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =5
+                  PaddingLeft: =5
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Width: =335
+            - ico_Popup_FecharOrdenar_Escalados:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxOrdenarOS: !ctxOrdenarOS })
+                  Width: =350
+                  Y: =50

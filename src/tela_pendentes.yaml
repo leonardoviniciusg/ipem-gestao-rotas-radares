@@ -1,0 +1,1306 @@
+Screens:
+  tela_pendentes:
+    Children:
+      - btn_TopBar_Titulo_Pendentes:
+          Control: ModernButton@1.0.0
+          Group: barra_contexto_pendentes
+          Properties:
+            FontWeight: =FontWeight.Lighter
+            Height: =55
+            Icon: ="CalendarAdd"
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =22
+            Text: ="AGENDAMENTO DE RADARES"
+            Width: =1920
+      - con_TopBar_Nav_Pendentes:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Group: barra_contexto_pendentes
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            DropShadow: =DropShadow.None
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =1920
+            Y: =55
+          Children:
+            - ava_TopBar_Usuario_Pendentes:
+                Control: ModernAvatar@1.1.0
+                Properties:
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =15
+                  PaddingLeft: =15
+                  PaddingRight: =15
+                  PaddingTop: =15
+            - lbl_TopBar_Usuario_Pendentes:
+                Control: ModernText@1.0.0
+                Properties:
+                  Color: =RGBA(8, 52, 100, 1)
+                  FontWeight: =FontWeight.Semibold
+                  Height: =80
+                  PaddingLeft: =15
+                  Text: =User().FullName
+                  Width: =700
+                  X: =40
+                  Y: =40
+            - tab_TopBar_Nav_Pendentes:
+                Control: ModernTabList@1.0.2
+                Properties:
+                  Default: |-
+                    =Switch(App.ActiveScreen, tela_pendentes, {Value: "Pendentes"}, tela_escalados, {Value: "Escalados"}, tela_agendados, {Value: "Agendados"})
+                  Items: |-
+                    =Table({Value: "Pendentes"}, {Value: "Escalados"}, {Value: "Agendados"})
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Switch(Self.Selected.Value, "Pendentes", Navigate(tela_pendentes, ScreenTransition.Fade), "Escalados", Navigate(tela_escalados, ScreenTransition.Fade), "Agendados", Navigate(tela_agendados, ScreenTransition.Fade))
+                  Size: =22
+                  Width: =500
+      - rec_Fundo_Pendentes:
+          Control: Rectangle@2.3.0
+          Properties:
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =765
+            Width: =1920
+            Y: =135
+      - con_Grid_Principal_Pendentes:
+          Control: GroupContainer@1.5.0
+          Variant: GridLayout
+          Properties:
+            Height: =765
+            LayoutGap: =15
+            LayoutGridColumns: =48
+            LayoutGridRows: =19
+            Width: =1920
+            Y: =135
+          Children:
+            - con_Card_PainelIA:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGridColumnEnd: =49
+                  LayoutGridColumnStart: =36
+                  LayoutGridRowEnd: =20
+                  LayoutGridRowStart: =1
+                  X: =40
+                  Y: =40
+                Children:
+                  - con_Header_PainelIA:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(227, 234, 243, 1)
+                        FillPortions: =0
+                        Height: =65
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width
+                      Children:
+                        - ico_Header_PainelIA:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              DisplayMode: =DisplayMode.View
+                              Height: =65
+                              Icon: =Icon.LightningBolt
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =20
+                              PaddingLeft: =25
+                              PaddingRight: =20
+                              PaddingTop: =20
+                        - lbl_Header_PainelIA:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              FontWeight: =FontWeight.Semibold
+                              Height: =65
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =20
+                              Text: ="PAINEL DE GERAÇÃO DE PROMPT"
+                              Width: =350
+                  - con_PainelIA_Miolo:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                      Children:
+                        - btn_PainelIA_AbrirModalPrompt:
+                            Control: ModernButton@1.0.0
+                            Properties:
+                              Height: =50
+                              Icon: ="DocumentBulletList"
+                              IconStyle: =IconStyle.Filled
+                              OnSelect: |-
+                                =UpdateContext({ ctxEditarPrompt: !ctxEditarPrompt })
+                              Size: =15
+                              Text: ="CONSULTAR PROMPT ENVIADO PARA A IA"
+                              Width: =400
+                              X: =51
+                              Y: =16
+                        - lbl_PainelIA_InstrucaoRetorno:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =RGBA(12, 59, 94, 1)
+                              Height: =40
+                              Text: ="Insira abaixo o retorno da IA:"
+                              Width: =400
+                              X: =8
+                              Y: =66
+                        - txt_PainelIA_RetornoJSON:
+                            Control: ModernTextInput@1.1.2
+                            Properties:
+                              Height: =519
+                              Placeholder: =
+                              Type: =TextInputType.Multiline
+                              Width: =487
+                              X: =8
+                              Y: =106
+                        - btn_PainelIA_AplicarJSON:
+                            Control: ModernButton@1.0.0
+                            Properties:
+                              Height: =50
+                              Icon: ="CheckmarkCircle"
+                              IconStyle: =IconStyle.Filled
+                              OnSelect: "=With(\r\n    {\r\n        TextoLimpo: Substitute(\r\n            Substitute(txt_PainelIA_RetornoJSON.Text, \"```json\", \"\"),\r\n            \"```\",\r\n            \"\"\r\n        )\r\n    },\r\n    With(\r\n        {\r\n            TabelaJSON: Table(ParseJSON(TextoLimpo))\r\n        },\r\n        \r\n        UpdateContext({ctxCarregando: true});\r\n        \r\n        ForAll(\r\n            TabelaJSON As LinhaIA,\r\n            With(\r\n                {\r\n                    _numOS: Text(LinhaIA.Value.Numero_OS),\r\n                    _nomeRota: Text(LinhaIA.Value.rota_nome),\r\n                    _ordem: Value(LinhaIA.Value.Ordem_Agendamento),\r\n                    _nomeStatus: Text(LinhaIA.Value.Status)\r\n                },\r\n                \r\n                UpdateIf(\r\n                    colOrdens,\r\n                    Text(n_os) = _numOS,\r\n                    {\r\n                        rota_nome: _nomeRota,\r\n                        ordem_agendamento: _ordem,\r\n                        status: { Value: _nomeStatus }\r\n                    }\r\n                )\r\n            )\r\n        );\r\n        \r\n        ClearCollect(\r\n            colRotas,\r\n            AddColumns(\r\n                Distinct(\r\n                    Filter(colOrdens, status.Value = \"Escalado\" && !IsBlank(Trim(rota_nome))),\r\n                    rota_nome\r\n                ),\r\n                status_rota, \"Escalado\"\r\n            )\r\n        );\r\n        \r\n        Reset(txt_PainelIA_RetornoJSON);\r\n        Clear(colSelecionados);\r\n        UpdateContext({ctxCarregando: false, ctxMostrarPainel: false});\r\n        Notify(\"Roteirização aplicada e rotas escaladas com sucesso!\", NotificationType.Success, 3000);\r\n        Navigate(tela_escalados, ScreenTransition.CoverRight)\r\n    )\r\n)"
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =15
+                              Text: ="APLICAR ROTEIRO JSON"
+                              Width: =505
+                              Y: =634
+            - con_Card_Detalhes_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGridColumnEnd: =36
+                  LayoutGridColumnStart: =23
+                  LayoutGridRowEnd: =20
+                  LayoutGridRowStart: =1
+                  X: =40
+                  Y: =40
+                Children:
+                  - con_Header_Detalhes_Pendentes:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(227, 234, 243, 1)
+                        FillPortions: =0
+                        Height: =65
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width
+                      Children:
+                        - ico_Header_Detalhes_Pendentes:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              DisplayMode: =DisplayMode.View
+                              Height: =65
+                              Icon: =Icon.ListScrollWatchlist
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =15
+                              PaddingLeft: =20
+                              PaddingRight: =15
+                              PaddingTop: =15
+                        - lbl_Header_Detalhes_Pendentes:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              FontWeight: =FontWeight.Semibold
+                              Height: =65
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =20
+                              Text: ="DETALHES DAS OS SELECIONADAS"
+                              Width: =350
+                        - lbl_Header_TotalOS_Detalhes:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =App.Theme.Colors.Lighter20
+                              FontWeight: =FontWeight.Bold
+                              Height: =35
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =25
+                              RadiusBottomRight: =25
+                              RadiusTopLeft: =25
+                              RadiusTopRight: =25
+                              Size: =16
+                              Text: =CountRows(colSelecionados)
+                              Width: =47
+                              Wrap: =false
+                  - con_Detalhes_HtmlWrapper:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                      Children:
+                        - htm_Detalhes_Resumo:
+                            Control: HtmlViewer@2.1.0
+                            Properties:
+                              Height: =Parent.Height
+                              HtmlText: "=If(\r\n    CountRows(colSelecionados) = 0,\r\n    \"<div style='font-family: Segoe UI, sans-serif; text-align: center; color: #7A8A8F; padding: 120px 20px; font-size: 15px; font-weight: 600;'>Nenhuma ordem de serviço selecionada.<br><span style='font-size: 12px; font-weight: 400; opacity: 0.8;'>Selecione itens na lista ao lado para ver o resumo completo.</span></div>\",\r\n    \r\n    CountRows(colSelecionados) = 1,\r\n    // --- CENÁRIO 1: SELEÇÃO ÚNICA (Expandido para preencher o container) ---\r\n    With(\r\n        First(colSelecionados),\r\n        \"<div style='font-family: Segoe UI, sans-serif; padding: 6px; color: #0C3B5E; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;'>\r\n            \r\n            <!-- Box Principal OS / Série -->\r\n            <div style='background: #0C3B5E; color: #ffffff; padding: 16px; border-radius: 10px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15);'>\r\n                <div style='font-size: 18px; font-weight: 800; line-height: 20px;'>Nº da OS: \" & n_os & \"</div>\r\n                <div style='font-size: 12px; font-weight: 600; opacity: 0.85; text-transform: uppercase; margin-top: 4px;'>Série: \" & Coalesce(n_serie, \"-\") & \"</div>\r\n            </div>\r\n\r\n            <!-- Métricas Principais (Faixas & Data) -->\r\n            <div style='display: flex; gap: 10px;'>\r\n                <div style='flex: 1; background: #E3EAF3; border: 1px solid #B0C4DE; padding: 12px; border-radius: 8px; text-align: center;'>\r\n                    <div style='font-size: 16px; font-weight: 800; color: #0C3B5E;'>\" & Coalesce(faixas, \"0\") & \"</div>\r\n                    <div style='font-size: 9px; font-weight: 700; color: #0F548C; text-transform: uppercase; margin-top: 2px;'>Faixas</div>\r\n                </div>\r\n                <div style='flex: 1.6; background: #E3EAF3; border: 1px solid #B0C4DE; padding: 12px; border-radius: 8px; text-align: center;'>\r\n                    <div style='font-size: 12px; font-weight: 800; color: #0C3B5E;'>\" & Coalesce(Text(Criado, \"dd/mm/yyyy hh:mm\"), \"-\") & \"</div>\r\n                    <div style='font-size: 9px; font-weight: 700; color: #0F548C; text-transform: uppercase; margin-top: 2px;'>Data da Solicitação</div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Bloco Local da Verificação -->\r\n            <div style='background: #F1F4F9; border: 1px solid #D5E1F2; padding: 14px; border-radius: 8px;'>\r\n                <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase; display: block; margin-bottom: 4px;'>\U0001F4CD Local da Verificação:</span>\r\n                <span style='font-size: 13px; font-weight: 600; color: #0C3B5E; line-height: 16px; display: block;'>\" & Coalesce(loc_ver, \"-\") & \"</span>\r\n                <span style='font-size: 11px; font-weight: 700; color: #395D83; margin-top: 4px; display: block;'>Município: \" & Coalesce(municipio, \"-\") & \"</span>\r\n            </div>\r\n\r\n            <!-- Bloco Empresa e Agente -->\r\n            <div style='display: flex; gap: 10px;'>\r\n                <div style='flex: 1; background: #F1F4F9; border: 1px solid #D5E1F2; padding: 12px; border-radius: 8px; overflow: hidden;'>\r\n                    <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase; display: block; margin-bottom: 2px;'>\U0001F3E2 Empresa:</span>\r\n                    <span style='font-size: 12px; font-weight: 700; color: #0C3B5E; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'>\" & Coalesce(empresa, \"-\") & \"</span>\r\n                </div>\r\n                <div style='flex: 1; background: #F1F4F9; border: 1px solid #D5E1F2; padding: 12px; border-radius: 8px; overflow: hidden;'>\r\n                    <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase; display: block; margin-bottom: 2px;'>\U0001F464 Agente:</span>\r\n                    <span style='font-size: 12px; font-weight: 700; color: #0C3B5E; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;'>\" & Coalesce(agente_mob, \"-\") & \"</span>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Vencimento -->\r\n            <div style='background: #F1F4F9; border: 1px solid #D5E1F2; padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;'>\r\n                <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase;'>\U0001F3F7️ Vencimento:</span>\r\n                <span style='font-size: 12px; font-weight: 600; color: #0C3B5E;'>\" & Coalesce(vencimento, \"Não informado\") & \"</span>\r\n            </div>\r\n        </div>\"\r\n    ),\r\n    \r\n    // --- CENÁRIO 2: MÚLTIPLOS ITENS SELECIONADOS (Consolidado Grande e Encorpado) ---\r\n    With(\r\n        {\r\n            totOS: CountRows(colSelecionados),\r\n            totFaixas: Sum(colSelecionados, Value(faixas)),\r\n            totMunicipios: CountRows(Distinct(colSelecionados, municipio)),\r\n            totEmpresas: CountRows(Distinct(colSelecionados, empresa)),\r\n            listaMunicipios: Concat(Distinct(colSelecionados, municipio), Value, \", \"),\r\n            listaEmpresas: Concat(Distinct(colSelecionados, empresa), Value, \", \")\r\n        },\r\n        \"<div style='font-family: Segoe UI, sans-serif; padding: 6px; color: #0C3B5E; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;'>\r\n            \r\n            <!-- Box Resumo Geral -->\r\n            <div style='background: #0C3B5E; color: #ffffff; padding: 16px; border-radius: 10px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15);'>\r\n                <div style='font-size: 18px; font-weight: 800; text-transform: uppercase;'>\" & totOS & \" Ordens Selecionadas</div>\r\n                <div style='font-size: 11px; opacity: 0.85; margin-top: 2px;'>Lote pronto para escalonamento ou exportação</div>\r\n            </div>\r\n\r\n            <!-- Total de Faixas Destacado -->\r\n            <div style='background: #E3EAF3; border: 1px solid #B0C4DE; padding: 14px; border-radius: 8px; text-align: center;'>\r\n                <div style='font-size: 20px; font-weight: 900; color: #0C3B5E;'>\" & totFaixas & \"</div>\r\n                <div style='font-size: 10px; font-weight: 800; color: #0F548C; text-transform: uppercase; margin-top: 2px;'>⚡ Carga Total de Faixas</div>\r\n            </div>\r\n\r\n            <!-- Municípios Envolvidos -->\r\n            <div style='background: #F1F4F9; border: 1px solid #D5E1F2; padding: 12px 14px; border-radius: 8px;'>\r\n                <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;'>\r\n                    <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase;'>\U0001F4CD Municípios Envolvidos</span>\r\n                    <span style='background: #E3EAF3; border: 1px solid #B0C4DE; font-size: 11px; font-weight: 800; padding: 1px 8px; border-radius: 10px; color: #0C3B5E;'>\" & totMunicipios & \"</span>\r\n                </div>\r\n                <div style='font-size: 12px; font-weight: 600; color: #0C3B5E; line-height: 14px;'>\" & listaMunicipios & \"</div>\r\n            </div>\r\n\r\n            <!-- Empresas Envolvidas -->\r\n            <div style='background: #F1F4F9; border: 1px solid #D5E1F2; padding: 12px 14px; border-radius: 8px;'>\r\n                <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;'>\r\n                    <span style='font-weight: 700; color: #0F548C; font-size: 10px; text-transform: uppercase;'>\U0001F3E2 Empresas Participantes</span>\r\n                    <span style='background: #E3EAF3; border: 1px solid #B0C4DE; font-size: 11px; font-weight: 800; padding: 1px 8px; border-radius: 10px; color: #0C3B5E;'>\" & totEmpresas & \"</span>\r\n                </div>\r\n                <div style='font-size: 12px; font-weight: 600; color: #0C3B5E; line-height: 14px;'>\" & listaEmpresas & \"</div>\r\n            </div>\r\n        </div>\"\r\n    )\r\n)"
+                              Width: =Parent.Width
+                  - con_Detalhes_Footer:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        Fill: =RGBA(0, 81, 100, 1)
+                        FillPortions: =0
+                        Height: =50
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Visible: =CountRows(colSelecionados) > 0
+                        X: =40
+                        Y: =40
+                      Children:
+                        - btn_Detalhes_CopiarPrompt:
+                            Control: ModernButton@1.0.0
+                            Properties:
+                              BasePaletteColor: =RGBA(141, 229, 250, 1)
+                              Height: =Parent.Height
+                              Icon: ="Copy"
+                              OnSelect: |-
+                                =Copy(
+                                    Substitute(
+                                        txt_Modal_Prompt_Template.Text,
+                                        "<<LISTA_AQUI>>",
+                                        Concat(
+                                            colSelecionados,
+                                            "OS: " & n_os & " | Agente: " & agente_mob & " | Empresa: " & empresa & " | Município: " & municipio & " | Localização: " & loc_ver & " | Faixas: " & faixas,
+                                            Char(10)
+                                        )
+                                    )
+                                );
+                                Notify("Prompt copiado para a área de transferência com sucesso!", NotificationType.Success, 2500)
+                              Text: ="COPIAR PROMPT"
+                              Width: =Parent.Width
+            - con_Card_ListaOS_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGridColumnEnd: =23
+                  LayoutGridColumnStart: =1
+                  LayoutGridRowEnd: =20
+                  LayoutGridRowStart: =1
+                  X: =40
+                  Y: =40
+                Children:
+                  - con_Header_ListaOS_Pendentes:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(227, 234, 243, 1)
+                        FillPortions: =0
+                        Height: =65
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =8
+                        PaddingLeft: =8
+                        PaddingRight: =8
+                        PaddingTop: =8
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width
+                      Children:
+                        - ico_Header_ListaOS_Pendentes:
+                            Control: Classic/Icon@2.5.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              DisplayMode: =DisplayMode.View
+                              Height: =65
+                              Icon: =Icon.ListWatchlistRemind
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =15
+                              PaddingLeft: =20
+                              PaddingRight: =15
+                              PaddingTop: =15
+                        - lbl_Header_ListaOS_Pendentes:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Color: =App.Theme.Colors.Primary
+                              FontWeight: =FontWeight.Semibold
+                              Height: =65
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Size: =20
+                              Text: ="LISTA DE ORDENS DE SERVIÇO PENDENTES"
+                              Width: =420
+                        - rec_Space_01_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - rec_Space_02_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - lbl_Header_TotalOS_Pendentes:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =App.Theme.Colors.Lighter20
+                              FontWeight: =FontWeight.Bold
+                              Height: =35
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =25
+                              RadiusBottomRight: =25
+                              RadiusTopLeft: =25
+                              RadiusTopRight: =25
+                              Size: =16
+                              Text: =CountRows(gal_Pendentes_Disponiveis.AllItems)
+                              Width: =47
+                              Wrap: =false
+                        - rec_Space_03_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - lbl_Header_TotalFaixas_Pendentes:
+                            Control: ModernText@1.0.0
+                            Properties:
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =App.Theme.Colors.Lighter30
+                              FontWeight: =FontWeight.Bold
+                              Height: =35
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              RadiusBottomLeft: =25
+                              RadiusBottomRight: =25
+                              RadiusTopLeft: =25
+                              RadiusTopRight: =25
+                              Size: =16
+                              Text: =Sum(gal_Pendentes_Disponiveis.AllItems, faixas) & " FAIXAS"
+                              Width: =105
+                              Wrap: =false
+                        - rec_Space_04_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              FillPortions: =1
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnPesquisar_Pendentes:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =If(txt_Popup_BuscaEndereco_Escalados.Text = "", RGBA(12, 59, 94, 1), RGBA(12, 79, 94, 1))
+                              Height: =40
+                              Icon: ="Search"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: !ctxPesquisarOS,
+                                    ctxFiltrarOS: false,
+                                    ctxOrdenarOS: false
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_05_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnFiltrar_Pendentes:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =RGBA(12, 59, 94, 1)
+                              Height: =40
+                              Icon: ="Filter"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: false,
+                                    ctxFiltrarOS: !ctxFiltrarOS,
+                                    ctxOrdenarOS: false
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_06_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                        - ico_Header_BtnOrdenar_Pendentes:
+                            Control: ModernIcon@1.1.1
+                            Properties:
+                              Fill: =RGBA(12, 59, 94, 1)
+                              Height: =40
+                              Icon: ="ArrowSort"
+                              IconColor: =RGBA(255, 255, 255, 1)
+                              IconStyle: =IconStyle.Filled
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              OnSelect: |-
+                                =UpdateContext({
+                                    ctxPesquisarOS: false,
+                                    ctxFiltrarOS: false,
+                                    ctxOrdenarOS: !ctxOrdenarOS
+                                })
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =255
+                              RadiusBottomRight: =255
+                              RadiusTopLeft: =255
+                              RadiusTopRight: =255
+                              Width: =40
+                        - rec_Space_07_Pendentes:
+                            Control: Rectangle@2.3.0
+                            Properties:
+                              DisplayMode: =DisplayMode.View
+                              Fill: =Parent.Fill
+                              Height: =Parent.Height
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              Width: =10
+                  - chk_ListaOS_SelecionarTudo:
+                      Control: ModernCheckbox@1.0.2
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Start
+                        Default: =CountRows(colSelecionados) = CountRows(Filter(colOrdens, status.Value = "Pendente")) && CountRows(Filter(colOrdens, status.Value = "Pendente")) > 0
+                        Label: ="Selecionar tudo"
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnCheck: =ClearCollect(colSelecionados, Filter(colOrdens, status.Value = "Pendente"))
+                        OnUncheck: =Clear(colSelecionados)
+                        Width: =Parent.Width
+                  - con_ListaOS_Miolo_Pendentes:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                      Children:
+                        - con_ListaOS_GaleriaWrapper:
+                            Control: GroupContainer@1.5.0
+                            Variant: ManualLayout
+                            Properties:
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =10
+                              PaddingLeft: =10
+                              PaddingRight: =10
+                              PaddingTop: =10
+                              X: =40
+                              Y: =40
+                            Children:
+                              - gal_ListaOS_Pendentes:
+                                  Control: Gallery@2.15.0
+                                  Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+                                  Properties:
+                                    Height: =Parent.Height
+                                    Items: |-
+                                      =SortByColumns(
+                                          With(
+                                              { 
+                                                  termoBusca: Lower(Trim(Coalesce(txt_Popup_BuscaEndereco_Pendentes.Text, txt_Popup_BuscaEndereco_Pendentes.Text, ""))) 
+                                              },
+                                              Filter(
+                                                  colOrdens,
+                                                  status.Value = "Pendente",
+
+                                                  termoBusca = "" Or termoBusca in Lower(Coalesce(loc_ver, "")),
+
+                                                  CountIf(cmb_Filtro_Municipio_Pendentes.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                                  municipio in cmb_Filtro_Municipio_Pendentes.SelectedItems.Value,
+
+                                                  CountIf(cmb_Filtro_Empresa_Pendentes.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                                  empresa in cmb_Filtro_Empresa_Pendentes.SelectedItems.Value,
+
+                                                  CountIf(cmb_Filtro_Agente_Pendentes.SelectedItems, !IsBlank(Value)) = 0 Or 
+                                                  agente_mob in cmb_Filtro_Agente_Pendentes.SelectedItems.Value
+                                              )
+                                          ),
+                                          Coalesce(drp_Popup_Ordenar_Pendentes.Selected.Coluna, "n_os"),
+                                          SortOrder.Ascending
+                                      )
+                                    TemplateSize: =120
+                                    Transition: =Transition.Push
+                                    Width: =Parent.Width
+                                  Children:
+                                    - con_ItemOS_Card_Pendentes:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: ManualLayout
+                                        Properties:
+                                          DropShadow: =DropShadow.None
+                                          Fill: =If(chk_ItemOS_Selecionar.Checked, App.Theme.Colors.Lighter60, RGBA(227, 234, 243, 1))
+                                          Height: =110
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Width: =833
+                                          X: =14
+                                    - ico_ItemOS_Empresa_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="BuildingRetail"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =61
+                                          Y: =16
+                                    - lbl_ItemOS_Empresa_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(15, 84, 140, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.empresa
+                                          X: =86
+                                          Y: =16
+                                    - ico_ItemOS_Serie_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="CameraDome"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =236
+                                          Y: =16
+                                    - lbl_ItemOS_Serie_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 0.5)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =10
+                                          RadiusBottomRight: =10
+                                          RadiusTopLeft: =10
+                                          RadiusTopRight: =10
+                                          Size: =13
+                                          Text: =ThisItem.n_serie
+                                          Width: =120
+                                          X: =261
+                                          Y: =16
+                                    - lbl_ItemOS_Faixas_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(0, 81, 100, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.faixas
+                                          Width: =30
+                                          X: =694
+                                          Y: =12
+                                    - lbl_ItemOS_NumOS_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Align: =Align.Center
+                                          Color: =RGBA(255, 255, 255, 1)
+                                          Fill: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =25
+                                          RadiusBottomRight: =25
+                                          RadiusTopLeft: =25
+                                          RadiusTopRight: =25
+                                          Size: =13
+                                          Text: =ThisItem.n_os
+                                          Width: =100
+                                          X: =732
+                                          Y: =12
+                                    - ico_ItemOS_Endereco_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Location"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =61
+                                          Y: =44
+                                    - lbl_ItemOS_Endereco_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.loc_ver
+                                          Width: =640
+                                          Wrap: =false
+                                          X: =86
+                                          Y: =44
+                                    - ico_ItemOS_Municipio_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="Building"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =61
+                                          Y: =69
+                                    - lbl_ItemOS_Municipio_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.municipio
+                                          VerticalAlign: =VerticalAlign.Bottom
+                                          Width: =230
+                                          Wrap: =false
+                                          X: =92
+                                          Y: =69
+                                    - ico_ItemOS_Venc_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =15
+                                          Icon: ="Tag"
+                                          OnSelect: =Select(Parent)
+                                          Width: =15
+                                          X: =689
+                                          Y: =88
+                                    - lbl_ItemOS_Venc_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Lighter
+                                          Height: =15
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: |-
+                                            ="Vencimento: " & ThisItem.vencimento
+                                          Width: =125
+                                          Wrap: =false
+                                          X: =708
+                                          Y: =88
+                                    - ico_ItemOS_Agente_Pendentes:
+                                        Control: ModernIcon@1.1.1
+                                        Properties:
+                                          Height: =25
+                                          Icon: ="VehicleBus"
+                                          OnSelect: =Select(Parent)
+                                          PaddingBottom: =2
+                                          PaddingLeft: =2
+                                          PaddingRight: =2
+                                          PaddingTop: =2
+                                          Width: =25
+                                          X: =322
+                                          Y: =69
+                                    - lbl_ItemOS_Agente_Pendentes:
+                                        Control: ModernText@1.0.0
+                                        Properties:
+                                          Color: =RGBA(12, 59, 94, 1)
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =25
+                                          OnSelect: =
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =ThisItem.agente_mob
+                                          VerticalAlign: =VerticalAlign.Bottom
+                                          Width: =300
+                                          Wrap: =false
+                                          X: =347
+                                          Y: =69
+                                    - chk_ItemOS_Selecionar:
+                                        Control: ModernCheckbox@1.0.2
+                                        Properties:
+                                          CheckboxSize: =25
+                                          Default: =ThisItem.ID in colSelecionados.ID
+                                          Height: =110
+                                          Label: =
+                                          OnCheck: =Collect(colSelecionados, ThisItem)
+                                          OnUncheck: =Remove(colSelecionados, LookUp(colSelecionados, ID = ThisItem.ID))
+                                          Size: =25
+                                          Width: =140
+                                          X: =20
+                        - con_Footer_Selecao_Pendentes:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =RGBA(15, 84, 140, 1)
+                              FillPortions: =0
+                              Height: =50
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Visible: =CountRows(colSelecionados) > 0
+                            Children:
+                              - ico_Footer_LimparSelecao:
+                                  Control: ModernIcon@1.1.1
+                                  Properties:
+                                    Icon: ="Dismiss"
+                                    IconColor: =RGBA(255, 255, 255, 1)
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    OnSelect: =Clear(colSelecionados)
+                                    PaddingBottom: =5
+                                    PaddingLeft: =5
+                                    PaddingRight: =5
+                                    PaddingTop: =5
+                              - lbl_Footer_ContadorSelecao:
+                                  Control: ModernText@1.0.0
+                                  Properties:
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    FillPortions: =1
+                                    LayoutMinHeight: =16
+                                    LayoutMinWidth: =16
+                                    Text: =CountRows(colSelecionados) & " itens selecionados"
+      - con_Popup_Pesquisa_Pendentes:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =70
+            Visible: =ctxPesquisarOS
+            X: =234
+            Y: =87
+          Children:
+            - con_Popup_CaixaBusca_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                Children:
+                  - txt_Popup_BuscaEndereco_Pendentes:
+                      Control: ModernTextInput@1.1.2
+                      Properties:
+                        FillPortions: =1
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Placeholder: ="Pesquisar endereço:"
+                  - ico_Popup_LimparBusca_Pendentes:
+                      Control: ModernIcon@1.1.1
+                      Properties:
+                        Icon: ="Dismiss"
+                        IconColor: =RGBA(122, 138, 143, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        OnSelect: =Reset(txt_Popup_BuscaEndereco_Pendentes)
+                        Visible: =!IsBlank(txt_Popup_BuscaEndereco_Pendentes.Text)
+            - ico_Popup_FecharBusca_Pendentes:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxPesquisarOS: !ctxPesquisarOS })
+                  Width: =500
+                  Y: =50
+      - con_Popup_Filtros_Pendentes:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =170
+            Visible: =ctxFiltrarOS
+            X: =284
+            Y: =192
+          Children:
+            - con_Filtro_Municipio_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                Children:
+                  - lbl_Filtro_Municipio_Pendentes:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Município"
+                        Width: =120
+                  - rec_Sep_Municipio_Pendentes:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Municipio_Pendentes:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(municipio)),
+                                  municipio
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar municípios"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(municipio)),
+                                  municipio
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - con_Filtro_Empresa_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Y: =50
+                Children:
+                  - lbl_Filtro_Empresa_Pendentes:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Empresa"
+                        Width: =120
+                  - rec_Sep_Empresa_Pendentes:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Empresa_Pendentes:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(empresa)),
+                                  empresa
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar empresas"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(empresa)),
+                                  empresa
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - con_Filtro_Agente_Pendentes:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =50
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =5
+                  PaddingLeft: =10
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Y: =100
+                Children:
+                  - lbl_Filtro_Agente_Pendentes:
+                      Control: ModernText@1.0.0
+                      Properties:
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Text: ="Agente de mob."
+                        Width: =120
+                  - rec_Sep_Agente_Pendentes:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        Width: =10
+                  - cmb_Filtro_Agente_Pendentes:
+                      Control: ModernCombobox@1.1.2
+                      Properties:
+                        DefaultSelectedItems: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(agente_mob)),
+                                  agente_mob
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        FillPortions: =1
+                        InputTextPlaceholder: ="Selecionar agente de mobilidade"
+                        ItemDisplayText: =ThisItem.Value
+                        Items: |-
+                          =Sort(
+                              Distinct(
+                                  Filter(colOrdens, !IsBlank(agente_mob)),
+                                  agente_mob
+                              ),
+                              Value,
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+            - ico_Popup_FecharFiltros_Pendentes:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxFiltrarOS: !ctxFiltrarOS })
+                  Width: =500
+                  Y: =150
+      - con_Popup_Ordenar_Pendentes:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =70
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =5
+            PaddingLeft: =10
+            PaddingRight: =5
+            PaddingTop: =5
+            Visible: =ctxOrdenarOS
+            Width: =350
+            X: =837
+            Y: =192
+          Children:
+            - drp_Popup_Ordenar_Pendentes:
+                Control: ModernDropdown@1.0.3
+                Properties:
+                  Default: |-
+                    ={ NomeExibicao: "Ordenar por nº da OS", Coluna: "n_os" }
+                  Height: =40
+                  ItemDisplayText: =ThisItem.NomeExibicao
+                  Items: |-
+                    =Table(
+                        { NomeExibicao: "Ordenar por nº da OS", Coluna: "n_os" },
+                        { NomeExibicao: "Ordenar por endereço (A a Z)", Coluna: "loc_ver" },
+                        { NomeExibicao: "Ordenar por município (A a Z)", Coluna: "municipio" },
+                        { NomeExibicao: "Ordenar por empresa (A a Z)", Coluna: "empresa" },
+                        { NomeExibicao: "Ordenar por agente de mobilidade (A a Z)", Coluna: "agente_mob" }
+                    )
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PaddingBottom: =5
+                  PaddingLeft: =5
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Width: =335
+            - ico_Popup_FecharOrdenar_Pendentes:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  BorderColor: =RGBA(122, 138, 143, 1)
+                  BorderStyle: =BorderStyle.Solid
+                  BorderThickness: =1
+                  Height: =19
+                  Icon: ="Checkmark"
+                  IconColor: =RGBA(122, 138, 143, 1)
+                  OnSelect: |-
+                    =UpdateContext({ ctxOrdenarOS: !ctxOrdenarOS })
+                  Width: =350
+                  Y: =50
+      - con_Modal_Prompt_Backdrop:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Fill: =RGBA(12, 59, 94, 0.14)
+            Height: =845
+            Visible: =ctxEditarPrompt
+            Width: =Parent.Width
+            Y: =55
+          Children:
+            - con_Modal_Prompt_Caixa:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  Height: =645
+                  RadiusBottomLeft: =25
+                  RadiusBottomRight: =25
+                  RadiusTopLeft: =25
+                  RadiusTopRight: =25
+                  Width: =Parent.Width - 200
+                  X: =100
+                  Y: =100
+                Children:
+                  - txt_Modal_Prompt_Template:
+                      Control: ModernTextInput@1.1.2
+                      Properties:
+                        Default: |-
+                          =Concatenate(
+                              "Atue como um Roteirizador Logístico de Operações e Especialista em Planejamento. Sua função é analisar uma lista de Ordens de Serviço (OS) e organizá-la em rotas otimizadas.", Char(10), Char(10),
+                              "Siga ESTRITAMENTE as regras logísticas estabelecidas: tempo de execução de 20 min/faixa, jornada 08h30-16h00 sem pernoite ou até 17h00 com pernoite, regras de diárias apenas em cidades permitidas, agrupamento inquebrável por Empresa e Rodovia, máximo de 4h ativas de deslocamento.", Char(10), Char(10),
+                              "1. Parâmetros de Tempo e Jornada de Trabalho (REGRA CRÍTICA)", Char(10),
+                              "- Tempo de Execução e Deslocamento: Cada 'Faixa' leva 20 minutos de execução. O cálculo do dia deve somar isso ao trajeto real. Reduza o volume de faixas se houver muitas trocas de rodovia/município.", Char(10),
+                              "- Jornada Padrão (Sem Pernoite): Saída de SJC às 08h30 e retorno impreterivelmente até as 16h00 (descontando 1h30 de almoço).", Char(10),
+                              "- Jornada Estendida (Com Pernoite/Diária): Se houver pernoite no destino, a janela estende-se até as 17h00.", Char(10),
+                              "- Equilíbrio de Carga em Viagens Longas: Em rotas que envolvam pernoite por múltiplos dias, distribua as faixas equilibradamente entre os dias usando empresas como delimitadores de bloco.", Char(10), Char(10),
+                              "2. Lógica de Deslocamento, Base e Cidades de Pernoite", Char(10),
+                              "- Base Operacional: Partida e retorno na R. Sebastião Humel, 759 - Centro, São José dos Campos - SP.", Char(10),
+                              "- Cidades Permitidas para Diária/Pernoite: Aparecida, Arapeí, Areias, Bananal, Cachoeira Paulista, Campos do Jordão, Canas, Caraguatatuba, Cruzeiro, Cunha, Guaratinguetá, Lagoinha, Lavrinhas, Lorena, Natividade da Serra, Piquete, Potim, Queluz, Redenção da Serra, Santo Antônio do Pinhal, São Bento do Sapucaí, São José do Barreiro, São Luís do Paraitinga, Silveiras e Ubatuba.", Char(10),
+                              "- Cidades Sem Diária: Só entram em rotas com pernoite se estiverem estritamente no trajeto de ida ou retorno à base de São José dos Campos.", Char(10), Char(10),
+                              "3. Consolidação e Agrupamento", Char(10),
+                              "- Unificação de Rodovias: Agrupe todas as OSs da mesma rodovia operadas pela mesma empresa. Não fragmente a mesma via em rotas distintas.", Char(10),
+                              "- Prioridade de Agrupamento: 1º Empresa, 2º Localização física sequencial lógica (sem zigue-zague).", Char(10),
+                              "- Proibição de Rotas Isoladas: Nunca crie uma rota para apenas 1 OS ou pouquíssimas faixas periféricas; incorpore-as ao fluxo de ida/volta de rotas de pernoite.", Char(10), Char(10),
+                              "4. Nomenclatura das Rotas", Char(10),
+                              "- Cada rota diária ou viagem deve receber um identificador textual claro no campo 'rota_nome', por exemplo: 'Rota 01', 'Rota 02', etc.", Char(10), Char(10),
+                              "---", Char(10),
+                              "Lista de Ordens de Serviço para Roteirização:", Char(10),
+                              "<<LISTA_AQUI>>", Char(10),
+                              "---", Char(10), Char(10),
+                              "FORMATO DE SAÍDA EXIGIDO (JSON ESTRITO):", Char(10),
+                              "Retorne EXCLUSIVAMENTE o array JSON cru, sem marcações markdown e sem textos adicionais. Chaves obrigatórias por objeto:", Char(10),
+                              "- ""Numero_OS"": (string) O 'Nº da OS' idêntico ao fornecido.", Char(10),
+                              "- ""rota_nome"": (string) O identificador da rota atribuída (Ex: ""Rota 01"").", Char(10),
+                              "- ""Ordem_Agendamento"": (número) A sequência de atendimento dentro da rota (1, 2, 3...).", Char(10),
+                              "- ""Status"": (string) Valor fixo ""Escalado"".", Char(10), Char(10),
+                              "Exemplo de saída esperada:", Char(10),
+                              "[", Char(10),
+                              "  { ""Numero_OS"": ""463/2026"", ""rota_nome"": ""Rota 01"", ""Ordem_Agendamento"": 1, ""Status"": ""Escalado"" },", Char(10),
+                              "  { ""Numero_OS"": ""464/2026"", ""rota_nome"": ""Rota 01"", ""Ordem_Agendamento"": 2, ""Status"": ""Escalado"" }", Char(10),
+                              "]"
+                          )
+                        Height: =Parent.Height - 16
+                        Placeholder: =
+                        RadiusBottomLeft: =25
+                        RadiusBottomRight: =25
+                        RadiusTopLeft: =25
+                        RadiusTopRight: =25
+                        Type: =TextInputType.Multiline
+                        Width: =Parent.Width - 16
+                        X: =8
+                        Y: =8
+            - ico_Modal_Prompt_Fechar:
+                Control: ModernIcon@1.1.1
+                Properties:
+                  Height: =50
+                  Icon: ="Dismiss"
+                  OnSelect: |-
+                    =UpdateContext({ ctxEditarPrompt: !ctxEditarPrompt })
+                  Width: =50
+                  X: =1870
