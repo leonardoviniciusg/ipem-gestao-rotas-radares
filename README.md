@@ -46,13 +46,13 @@ O aplicativo foi arquitetado em 3 etapas integradas:
 ## 🖥️ Telas do Sistema
 
 ### 1. Ordens Pendentes & Painel de IA
-> *[Insira aqui uma captura de tela ou GIF mostrando a seleção de OS e o JSON da IA sendo aplicado]*
+>![Tela de Pendentes](assets/tela_pendentes_bruto.png)
 
 ### 2. Edição de Rotas & Mapa Dinâmico
-> *[Insira aqui a captura de tela da galeria de rotas e o botão do Google Maps]*
+>![Tela de Edição de Rotas](assets/tela_escalados_bruto.png)
 
 ### 3. Agendamento e Balanceamento de Equipes
-> *[Insira aqui a captura mostrando a barra de progresso, Equipe 1 e Equipe 2]*
+>![Tela de Agendamento](assets/tela_agendados_bruto.png)
 
 ---
 
